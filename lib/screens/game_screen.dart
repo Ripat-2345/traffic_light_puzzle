@@ -23,8 +23,8 @@ class _GameScreenState extends State<GameScreen> {
               padding: const EdgeInsets.all(20),
               child: InkWell(
                 onTap: () {
-                  var test = gameController.box[1][0] = 1;
-                  (gameController.box[1][0] != 0) ? print(true) : print(false);
+                  gameController.countLamp();
+                  print(gameController.box[1]);
                 },
                 child: Container(
                   width: 150,
@@ -37,16 +37,16 @@ class _GameScreenState extends State<GameScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: (gameController.box.containsValue([1][0]))
-                              ? Colors.amber
-                              : Colors.white,
-                          borderRadius: BorderRadius.circular(100),
-                        ),
-                      ),
+                      Obx(() => Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: (gameController.box[1]![0] != 0)
+                                  ? Colors.amber
+                                  : Colors.white,
+                              borderRadius: BorderRadius.circular(100),
+                            ),
+                          )),
                       const SizedBox(
                         height: 15,
                       ),
