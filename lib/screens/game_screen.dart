@@ -1,390 +1,107 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_game/const.dart';
 import 'package:flutter_game/controllers/game_controller.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
-class GameScreen extends StatefulWidget {
+class GameScreen extends GetView<GameController> {
   const GameScreen({Key? key}) : super(key: key);
 
   @override
-  State<GameScreen> createState() => _GameScreenState();
-}
-
-class _GameScreenState extends State<GameScreen> {
-  final gameController = Get.put(GameController());
-  List numBox = [1, 3];
-
-  @override
   Widget build(BuildContext context) {
+    int data = 9;
     return Scaffold(
-      body: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: Stack(
+        children: [
+          Align(
+            alignment: Alignment.topCenter,
+            child: Padding(
+              padding: EdgeInsets.only(
+                top: 50,
+                left: (Get.width / data),
+                right: (Get.width / data),
+              ),
+              child: Wrap(
+                spacing: 10,
+                runSpacing: 10,
+                alignment: WrapAlignment.spaceEvenly,
                 children: [
-                  InkWell(
-                    onTap: () {
-                      gameController.countLamp(1);
-                      gameController.countLamp(5);
-                      print(gameController.lamp[1]);
-                    },
-                    child: Container(
-                      width: 150,
-                      height: 150,
-                      decoration: BoxDecoration(
-                        color: Colors.tealAccent,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Obx(
-                            () => Container(
-                              width: 40,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                color: (gameController.lamp[1]![0] != 0)
-                                    ? Colors.red
-                                    : Colors.white,
-                                borderRadius: BorderRadius.circular(100),
+                  for (var i = 1; i <= data; i++)
+                    InkWell(
+                      onTap: () {
+                        controller.countLamp(i);
+                        controller.countLamp((i == data) ? 1 : i + 1);
+                        print([i, (i == data) ? 1 : i + 1]);
+
+                        // controller
+                        //     .countLamp(((data - i) == 0) ? data : data - i);
+                        // controller.countLamp((i == data) ? 1 : i);
+                        // print([
+                        //   ((data - i) == 0) ? data : data - i,
+                        //   (i == data) ? 1 : i
+                        // ]);
+                      },
+                      child: Container(
+                        width: Get.width / 10,
+                        height: Get.width / 20,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: darkColor,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Obx(
+                              () => Container(
+                                width: Get.width / 35,
+                                height: Get.width / 35,
+                                decoration: BoxDecoration(
+                                  color: (controller.lamp[i]![0] != 0)
+                                      ? Colors.green
+                                      : Colors.white,
+                                  borderRadius: BorderRadius.circular(100),
+                                ),
                               ),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Obx(
-                                () => Container(
-                                  width: 40,
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                    color: (gameController.lamp[1]![1] != 0)
-                                        ? Colors.amber
-                                        : Colors.white,
-                                    borderRadius: BorderRadius.circular(100),
-                                  ),
+                            Obx(
+                              () => Container(
+                                width: Get.width / 35,
+                                height: Get.width / 35,
+                                decoration: BoxDecoration(
+                                  color: (controller.lamp[i]![1] != 0)
+                                      ? Colors.green
+                                      : Colors.amber,
+                                  borderRadius: BorderRadius.circular(100),
                                 ),
-                              ),
-                              const SizedBox(
-                                width: 20,
-                              ),
-                              Obx(
-                                () => Container(
-                                  width: 40,
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                    color: (gameController.lamp[1]![2] != 0)
-                                        ? Colors.green
-                                        : Colors.white,
-                                    borderRadius: BorderRadius.circular(100),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      gameController.countLamp(2);
-                      gameController.countLamp(3);
-                      print(gameController.lamp[3]);
-                    },
-                    child: Container(
-                      width: 150,
-                      height: 150,
-                      decoration: BoxDecoration(
-                        color: Colors.tealAccent,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Obx(
-                            () => Container(
-                              width: 40,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                color: (gameController.lamp[3]![0] != 0)
-                                    ? Colors.red
-                                    : Colors.white,
-                                borderRadius: BorderRadius.circular(100),
                               ),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Obx(
-                                () => Container(
-                                  width: 40,
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                    color: (gameController.lamp[3]![1] != 0)
-                                        ? Colors.amber
-                                        : Colors.white,
-                                    borderRadius: BorderRadius.circular(100),
-                                  ),
+                            Obx(
+                              () => Container(
+                                width: Get.width / 35,
+                                height: Get.width / 35,
+                                decoration: BoxDecoration(
+                                  color: (controller.lamp[i]![2] != 0)
+                                      ? Colors.green
+                                      : Colors.red,
+                                  borderRadius: BorderRadius.circular(100),
                                 ),
-                              ),
-                              const SizedBox(
-                                width: 20,
-                              ),
-                              Obx(
-                                () => Container(
-                                  width: 40,
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                    color: (gameController.lamp[3]![2] != 0)
-                                        ? Colors.green
-                                        : Colors.white,
-                                    borderRadius: BorderRadius.circular(100),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      gameController.countLamp(3);
-                      gameController.countLamp(4);
-                      print(gameController.lamp[4]);
-                    },
-                    child: Container(
-                      width: 150,
-                      height: 150,
-                      decoration: BoxDecoration(
-                        color: Colors.tealAccent,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Obx(
-                            () => Container(
-                              width: 40,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                color: (gameController.lamp[4]![0] != 0)
-                                    ? Colors.red
-                                    : Colors.white,
-                                borderRadius: BorderRadius.circular(100),
                               ),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Obx(
-                                () => Container(
-                                  width: 40,
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                    color: (gameController.lamp[4]![1] != 0)
-                                        ? Colors.amber
-                                        : Colors.white,
-                                    borderRadius: BorderRadius.circular(100),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 20,
-                              ),
-                              Obx(
-                                () => Container(
-                                  width: 40,
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                    color: (gameController.lamp[4]![2] != 0)
-                                        ? Colors.green
-                                        : Colors.white,
-                                    borderRadius: BorderRadius.circular(100),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      gameController.countLamp(1);
-                      gameController.countLamp(2);
-                      print(gameController.lamp[2]);
-                    },
-                    child: Container(
-                      width: 150,
-                      height: 150,
-                      decoration: BoxDecoration(
-                        color: Colors.tealAccent,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Obx(
-                            () => Container(
-                              width: 40,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                color: (gameController.lamp[2]![0] != 0)
-                                    ? Colors.red
-                                    : Colors.white,
-                                borderRadius: BorderRadius.circular(100),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Obx(
-                                () => Container(
-                                  width: 40,
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                    color: (gameController.lamp[2]![1] != 0)
-                                        ? Colors.amber
-                                        : Colors.white,
-                                    borderRadius: BorderRadius.circular(100),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 20,
-                              ),
-                              Obx(
-                                () => Container(
-                                  width: 40,
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                    color: (gameController.lamp[2]![2] != 0)
-                                        ? Colors.green
-                                        : Colors.white,
-                                    borderRadius: BorderRadius.circular(100),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      gameController.countLamp(4);
-                      gameController.countLamp(5);
-                      print(gameController.lamp[5]);
-                    },
-                    child: Container(
-                      width: 150,
-                      height: 150,
-                      decoration: BoxDecoration(
-                        color: Colors.tealAccent,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Obx(
-                            () => Container(
-                              width: 40,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                color: (gameController.lamp[5]![0] != 0)
-                                    ? Colors.red
-                                    : Colors.white,
-                                borderRadius: BorderRadius.circular(100),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Obx(
-                                () => Container(
-                                  width: 40,
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                    color: (gameController.lamp[5]![1] != 0)
-                                        ? Colors.amber
-                                        : Colors.white,
-                                    borderRadius: BorderRadius.circular(100),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 20,
-                              ),
-                              Obx(
-                                () => Container(
-                                  width: 40,
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                    color: (gameController.lamp[5]![2] != 0)
-                                        ? Colors.green
-                                        : Colors.white,
-                                    borderRadius: BorderRadius.circular(100),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: Lottie.asset("images/car.json", height: 300),
+          )
+        ],
       ),
     );
   }

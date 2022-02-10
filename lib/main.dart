@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_game/controllers/game_controller.dart';
 import 'package:flutter_game/screens/game_screen.dart';
 import 'package:flutter_game/screens/home_screen.dart';
 import 'package:get/get.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
+  MyApp({Key? key}) : super(key: key);
+  final gameController = Get.put(GameController());
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(

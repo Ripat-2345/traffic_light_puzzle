@@ -3,8 +3,6 @@ import 'dart:math';
 import 'package:get/get.dart';
 
 class GameController extends GetxController {
-  List box = [1, 2, 3, 4, 5];
-
   Map<int, RxList> lamp = {
     1: [
       1,
@@ -27,6 +25,31 @@ class GameController extends GetxController {
       ((Random().nextInt(3) + 2) == 3) ? 3 : 0,
     ].obs,
     5: [
+      1,
+      ((Random().nextInt(2) + 1) == 2) ? 2 : 0,
+      ((Random().nextInt(3) + 2) == 3) ? 3 : 0,
+    ].obs,
+    6: [
+      1,
+      ((Random().nextInt(2) + 1) == 2) ? 2 : 0,
+      ((Random().nextInt(3) + 2) == 3) ? 3 : 0,
+    ].obs,
+    7: [
+      1,
+      ((Random().nextInt(2) + 1) == 2) ? 2 : 0,
+      ((Random().nextInt(3) + 2) == 3) ? 3 : 0,
+    ].obs,
+    8: [
+      1,
+      ((Random().nextInt(2) + 1) == 2) ? 2 : 0,
+      ((Random().nextInt(3) + 2) == 3) ? 3 : 0,
+    ].obs,
+    9: [
+      1,
+      ((Random().nextInt(2) + 1) == 2) ? 2 : 0,
+      ((Random().nextInt(3) + 2) == 3) ? 3 : 0,
+    ].obs,
+    10: [
       1,
       ((Random().nextInt(2) + 1) == 2) ? 2 : 0,
       ((Random().nextInt(3) + 2) == 3) ? 3 : 0,
