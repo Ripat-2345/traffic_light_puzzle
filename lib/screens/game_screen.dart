@@ -203,7 +203,7 @@ class GameScreen extends GetView<GameController> {
                       height:
                           (MediaQuery.of(context).size.width < 800) ? 120 : 180,
                       child: Lottie.asset(
-                        "images/car.json",
+                        "assets/images/car.json",
                         fit: BoxFit.cover,
                       ),
                     ),

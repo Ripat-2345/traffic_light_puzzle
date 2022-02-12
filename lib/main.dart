@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_game/controllers/game_controller.dart';
 import 'package:flutter_game/screens/game_screen.dart';
-import 'package:flutter_game/homepage.dart';
 import 'package:get/get.dart';
 
 import 'screens/home_screen.dart';
@@ -18,7 +17,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       theme: ThemeData(fontFamily: 'Lemon'),
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: HomeScreen(),
     );
   }
 }

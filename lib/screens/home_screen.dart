@@ -1,17 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_game/const.dart';
 import 'package:flutter_game/screens/game_screen.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+void main() {
+  runApp(HomeScreen());
+}
+
+class HomeScreen extends StatefulWidget {
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  String? selected;
+  List<String> data = ["Level 1", "Level 2", "Level 3", "Level 4", "Level 5"];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0XFFF1D00A),
-      body: Center(
-          child: Column(
+      backgroundColor: yellowColor,
+      body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -23,23 +33,44 @@ class HomeScreen extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
-          Align(
-            child: Container(
-                alignment: Alignment.center,
-                width: (MediaQuery.of(context).size.width < 800) ? 200 : 300,
-                height: (MediaQuery.of(context).size.width < 800) ? 120 : 180,
-                child: Lottie.asset(
-                  "images/car.json",
-                  fit: BoxFit.cover,
-                )),
+          SizedBox(
+            // width: (MediaQuery.of(context).size.width < 800) ? 200 : 300,
+            height: (MediaQuery.of(context).size.width < 800) ? 120 : 480,
+            child: Lottie.asset(
+              "assets/images/car.json",
+              // fit: BoxFit.cover,
+            ),
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              ElevatedButton(
-                onPressed: () => Get.to(
-                  const GameScreen(),
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              DropdownButton(
+                underline: DropdownButtonHideUnderline(child: Container()),
+                dropdownColor: darkColor,
+                value: selected,
+                hint: const Text(
+                  "Pilih level",
                 ),
+                onChanged: (value) {
+                  print(value);
+                  setState(() {
+                    selected = value.toString();
+                  });
+                },
+                items: data
+                    .map(
+                      (e) => DropdownMenuItem(
+                        value: e,
+                        child: Text(
+                          e,
+                        ),
+                      ),
+                    )
+                    .toList(),
+              ),
+              const SizedBox(width: 10),
+              ElevatedButton(
+                onPressed: () => Get.to(const GameScreen()),
                 child: const Text(
                   "Start Game",
                   style: TextStyle(
@@ -48,9 +79,9 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ],
-          )
+          ),
         ],
-      )),
+      ),
     );
   }
 }
