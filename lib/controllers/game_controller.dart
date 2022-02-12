@@ -99,6 +99,11 @@ class GameController extends GetxController {
       ((Random().nextInt(2) + 1) == 2) ? 2 : 0,
       ((Random().nextInt(3) + 2) == 3) ? 3 : 0,
     ].obs,
+    20: [
+      1,
+      ((Random().nextInt(2) + 1) == 2) ? 2 : 0,
+      ((Random().nextInt(3) + 2) == 3) ? 3 : 0,
+    ].obs,
   };
 
   void countLamp(int index) {
