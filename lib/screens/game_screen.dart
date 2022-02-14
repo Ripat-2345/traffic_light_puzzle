@@ -17,16 +17,24 @@ class GameScreen extends StatefulWidget {
 class _GameScreenState extends State<GameScreen> {
   final gameController = Get.put(GameController());
   late CountdownTimerController timeController;
-  int endTime = DateTime.now().millisecondsSinceEpoch + 1000 * 120;
+  int endTime = DateTime.now().millisecondsSinceEpoch + 1000 * 60;
   int data = 19;
 
   void onEnd() {
     Get.defaultDialog(
-      title: "Traffic Light Puzzle",
-      middleText: "Game was ended",
-      textConfirm: "OK",
+      backgroundColor: whiteColor,
+      title: "Time Is Over",
+      titleStyle: TextStyle(color: darkColor, fontSize: 20),
+      content: Lottie.asset("assets/images/clock.json",
+          width: 300, fit: BoxFit.cover),
+      contentPadding: const EdgeInsets.all(10),
+      textConfirm: "Restart",
+      confirmTextColor: darkColor,
+      onConfirm: () => Get.offAll(const GameScreen()),
+      textCancel: "Back",
       cancelTextColor: darkColor,
-      onConfirm: () => Get.offAll(HomeScreen()),
+      onCancel: () => Get.offAll(HomeScreen()),
+      buttonColor: yellowColor,
     );
   }
 
@@ -110,47 +118,12 @@ class _GameScreenState extends State<GameScreen> {
                       runSpacing: 10,
                       alignment: WrapAlignment.spaceBetween,
                       children: [
-                        for (var i = 0; i < data; i++)
+                        for (var i = 1; i <= data; i++)
                           InkWell(
                             onTap: () {
                               gameController.countLamp(i);
                               gameController.countLamp((i == data) ? 1 : i + 1);
                               print([i, (i == data) ? 1 : i + 1]);
-
-                              // controller
-                              //     .countLamp(((data - i) == 0) ? data : data - i);
-                              // gameController.countLamp((i == data) ? 1 : i);
-                              // print([
-                              //   ((data - i) == 0) ? data : data - i,
-                              //   (i == data) ? 1 : i
-                              // ]);
-
-                              //  gameController.countLamp(
-                              //   (i % 2 == 1)
-                              //       ? i
-                              //       : (data - i == 0)
-                              //           ? data - 1
-                              //           : data - i,
-                              // );
-                              // gameController.countLamp(
-                              //   (i % 2 == 0)
-                              //       ? i
-                              //       : (data - i == 0)
-                              //           ? data - 1
-                              //           : data - i,
-                              // );
-                              // print([
-                              //   (i % 2 == 1)
-                              //       ? i
-                              //       : (data - i == 0)
-                              //           ? data - 1
-                              //           : data - i,
-                              //   (i % 2 == 0)
-                              //       ? i
-                              //       : (data - i == 0)
-                              //           ? data - 1
-                              //           : data - i,
-                              // ]);
                             },
                             child: Container(
                               width: (MediaQuery.of(context).size.width < 800)

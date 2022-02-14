@@ -3,15 +3,15 @@ import 'dart:math';
 import 'package:get/get.dart';
 
 class GameController extends GetxController {
-  RxList lamp = [].obs;
+  Map<int, RxList> lamp = {};
 
   void getLamp(int count) {
-    for (var i = 0; i < count; i++) {
-      lamp.add([
+    for (var i = 1; i <= count; i++) {
+      lamp[i] = [
         1,
         ((Random().nextInt(2) + 1) == 2) ? 2 : 0,
         ((Random().nextInt(3) + 2) == 3) ? 3 : 0,
-      ].obs);
+      ].obs;
     }
   }
 
