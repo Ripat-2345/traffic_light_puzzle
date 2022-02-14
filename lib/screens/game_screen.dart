@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_game/const.dart';
 import 'package:flutter_game/controllers/game_controller.dart';
+import 'package:flutter_game/screens/home_screen.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
