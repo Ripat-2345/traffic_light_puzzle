@@ -1,17 +1,53 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_countdown_timer/countdown_timer_controller.dart';
+import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutter_game/const.dart';
 import 'package:flutter_game/controllers/game_controller.dart';
+import 'package:flutter_game/screens/home_screen.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
-class GameScreen extends GetView<GameController> {
+class GameScreen extends StatefulWidget {
   const GameScreen({Key? key}) : super(key: key);
 
   @override
+  State<GameScreen> createState() => _GameScreenState();
+}
+
+class _GameScreenState extends State<GameScreen> {
+  final gameController = Get.put(GameController());
+  late CountdownTimerController timeController;
+  int endTime = DateTime.now().millisecondsSinceEpoch + 1000 * 120;
+  int data = 19;
+
+  void onEnd() {
+    Get.defaultDialog(
+      title: "Traffic Light Puzzle",
+      middleText: "Game was ended",
+      textConfirm: "OK",
+      cancelTextColor: darkColor,
+      onConfirm: () => Get.offAll(HomeScreen()),
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    gameController.getLamp(data);
+    timeController = CountdownTimerController(endTime: endTime, onEnd: onEnd);
+    if (endTime == 0) {
+      onEnd();
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    timeController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    int data = 19;
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Container(
@@ -29,13 +65,26 @@ class GameScreen extends GetView<GameController> {
                   const SizedBox(
                     height: 10,
                   ),
-                  Text(
-                    "Time: 01.30",
-                    style: TextStyle(
-                      fontSize: 24,
-                      color: yellowColor,
-                    ),
-                    textAlign: TextAlign.center,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Time: ",
+                        style: TextStyle(
+                          fontSize: 24,
+                          color: yellowColor,
+                        ),
+                      ),
+                      CountdownTimer(
+                        textStyle: TextStyle(
+                          fontSize: 24,
+                          color: yellowColor,
+                        ),
+                        controller: timeController,
+                        onEnd: onEnd,
+                        endTime: endTime,
+                      ),
+                    ],
                   ),
                   const SizedBox(
                     height: 30,
@@ -61,29 +110,29 @@ class GameScreen extends GetView<GameController> {
                       runSpacing: 10,
                       alignment: WrapAlignment.spaceBetween,
                       children: [
-                        for (var i = 1; i <= data; i++)
+                        for (var i = 0; i < data; i++)
                           InkWell(
                             onTap: () {
-                              controller.countLamp(i);
-                              controller.countLamp((i == data) ? 1 : i + 1);
+                              gameController.countLamp(i);
+                              gameController.countLamp((i == data) ? 1 : i + 1);
                               print([i, (i == data) ? 1 : i + 1]);
 
                               // controller
                               //     .countLamp(((data - i) == 0) ? data : data - i);
-                              // controller.countLamp((i == data) ? 1 : i);
+                              // gameController.countLamp((i == data) ? 1 : i);
                               // print([
                               //   ((data - i) == 0) ? data : data - i,
                               //   (i == data) ? 1 : i
                               // ]);
 
-                              //  controller.countLamp(
+                              //  gameController.countLamp(
                               //   (i % 2 == 1)
                               //       ? i
                               //       : (data - i == 0)
                               //           ? data - 1
                               //           : data - i,
                               // );
-                              // controller.countLamp(
+                              // gameController.countLamp(
                               //   (i % 2 == 0)
                               //       ? i
                               //       : (data - i == 0)
@@ -131,7 +180,7 @@ class GameScreen extends GetView<GameController> {
                                               ? 15
                                               : 30,
                                       decoration: BoxDecoration(
-                                        color: (controller.lamp[i]![0] != 0)
+                                        color: (gameController.lamp[i]![0] != 0)
                                             ? Colors.green
                                             : Colors.white,
                                         borderRadius:
@@ -152,7 +201,7 @@ class GameScreen extends GetView<GameController> {
                                               ? 15
                                               : 30,
                                       decoration: BoxDecoration(
-                                        color: (controller.lamp[i]![1] != 0)
+                                        color: (gameController.lamp[i]![1] != 0)
                                             ? Colors.green
                                             : Colors.amber,
                                         borderRadius:
@@ -173,7 +222,7 @@ class GameScreen extends GetView<GameController> {
                                               ? 15
                                               : 30,
                                       decoration: BoxDecoration(
-                                        color: (controller.lamp[i]![2] != 0)
+                                        color: (gameController.lamp[i]![2] != 0)
                                             ? Colors.green
                                             : Colors.red,
                                         borderRadius:
