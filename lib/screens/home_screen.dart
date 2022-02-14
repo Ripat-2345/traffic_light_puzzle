@@ -1,23 +1,20 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_game/const.dart';
+import 'package:flutter_game/controllers/home_controller.dart';
 import 'package:flutter_game/screens/game_screen.dart';
+import 'package:flutter_game/screens/widgets/car_color_widget.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
-void main() {
-  runApp(HomeScreen());
-}
-
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String? selected;
-  List<String> data = ["Level 1", "Level 2", "Level 3", "Level 4", "Level 5"];
+  final homeController = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -31,66 +28,74 @@ class _HomeScreenState extends State<HomeScreen> {
             "Traffic Light Puzzle",
             style: TextStyle(
               color: darkColor,
-              fontSize: (MediaQuery.of(context).size.width < 800) ? 30 : 40,
+              fontSize: (MediaQuery.of(context).size.width < 800) ? 30 : 80,
               fontWeight: FontWeight.w600,
             ),
             textAlign: TextAlign.center,
           ),
-          SizedBox(
-            width: (MediaQuery.of(context).size.width < 800) ? 300 : 400,
-            // height: (MediaQuery.of(context).size.width < 800) ? 120 : 480,
-            child: Lottie.asset(
-              "assets/images/car.json",
-              // fit: BoxFit.cover,
-            ),
+          Lottie.asset(
+            "assets/images/car.json",
+            height: (MediaQuery.of(context).size.width < 800) ? 300 : 300,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              for (var i = 0; i < homeController.color.length; i++)
+                CarColor(color: homeController.color[i]),
+            ],
+          ),
+          const SizedBox(
+            height: 10,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               InkWell(
                 child: Container(
-                    height: 40,
-                    width: 130,
-                    padding: EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                      color: blueColor,
-                      borderRadius: BorderRadius.all(Radius.circular(7)),
+                  height: 40,
+                  width: 130,
+                  padding: const EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    color: darkColor,
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(7),
                     ),
-                    child: DropdownButton(
-                      iconEnabledColor: whiteColor,
-                      underline:
-                          DropdownButtonHideUnderline(child: Container()),
-                      dropdownColor: darkColor,
-                      value: selected,
-                      hint: const Text(
-                        "Pilih level",
-                        style: TextStyle(color: Color(0XFFF0F0F0)),
+                  ),
+                  child: DropdownButton(
+                    iconEnabledColor: whiteColor,
+                    dropdownColor: darkColor,
+                    hint: Text(
+                      "Pilih level",
+                      style: TextStyle(
+                        color: whiteColor,
                       ),
-                      onChanged: (value) {
-                        print(value);
-                        setState(() {
-                          selected = value.toString();
-                        });
-                      },
-                      items: data
-                          .map(
-                            (e) => DropdownMenuItem(
-                              value: e,
-                              child: Text(
-                                e,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Color(0XFFF0F0F0),
-                                  fontSize:
-                                      (MediaQuery.of(context).size.width < 800)
-                                          ? 20
-                                          : 17,
-                                ),
+                    ),
+                    underline: DropdownButtonHideUnderline(
+                      child: Container(),
+                    ),
+                    items: homeController.levels
+                        .map(
+                          (e) => DropdownMenuItem(
+                            value: e,
+                            child: Text(
+                              e,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: whiteColor,
+                                fontSize:
+                                    (MediaQuery.of(context).size.width < 800)
+                                        ? 20
+                                        : 17,
                               ),
                             ),
-                          )
-                          .toList(),
-                    )),
+                          ),
+                        )
+                        .toList(),
+                    onChanged: (value) {
+                      homeController.selected.value = value.toString();
+                    },
+                  ),
+                ),
               ),
               const SizedBox(width: 30),
               InkWell(
@@ -99,10 +104,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 40,
                   width: 130,
                   alignment: Alignment.center,
-                  padding: EdgeInsets.all(5),
+                  padding: const EdgeInsets.all(5),
                   decoration: BoxDecoration(
-                    color: blueColor,
-                    borderRadius: BorderRadius.all(Radius.circular(7)),
+                    color: darkColor,
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(7),
+                    ),
                   ),
                   child: Text(
                     "Start Game",
@@ -115,39 +122,41 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-              const SizedBox(
-                width: 30,
-              ),
-              InkWell(
-                  child: Container(
-                      decoration: BoxDecoration(
-                        color: blueColor,
-                        borderRadius: BorderRadius.all(Radius.circular(7)),
-                      ),
-                      height: 40,
-                      width: 130,
-                      padding: EdgeInsets.all(5),
-                      child: TextButton(
-                        onPressed: () => Get.defaultDialog(
-                            backgroundColor: whiteColor,
-                            title: "Tips",
-                            content: Text(
-                              "Ubah semua lampu menjadi lampu hijau!",
-                              textAlign: TextAlign.center,
-                            ),
-                            confirm: ElevatedButton(
-                                onPressed: () => Get.back(),
-                                child: Text("OK !"))),
-                        child: Text("Tips",
-                            style: TextStyle(
-                                color: whiteColor,
-                                fontSize:
-                                    (MediaQuery.of(context).size.width < 800)
-                                        ? 22
-                                        : 19)),
-                      )))
             ],
           ),
+          const SizedBox(
+            height: 10,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              InkWell(
+                onTap: () {
+                  Get.defaultDialog(
+                    title: "Cara Bermain",
+                    titleStyle: TextStyle(
+                      color: darkColor,
+                      fontSize: 20,
+                    ),
+                    middleText: "Ubah Semua Lampu Menjadi Warna Hijau",
+                    contentPadding: const EdgeInsets.all(20),
+                    onConfirm: () => Get.back(),
+                    textConfirm: "Mengerti",
+                    confirmTextColor: darkColor,
+                    buttonColor: yellowColor,
+                  );
+                },
+                child: Text(
+                  "Cara Bermain",
+                  style: TextStyle(
+                    color: darkColor,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+            ],
+          )
         ],
       ),
     );

@@ -16,7 +16,11 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       theme: ThemeData(fontFamily: 'Lemon'),
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      initialRoute: '/Home',
+      getPages: [
+        GetPage(name: '/Home', page: () => const HomeScreen()),
+      ],
+      home: const HomeScreen(),
     );
   }
 }

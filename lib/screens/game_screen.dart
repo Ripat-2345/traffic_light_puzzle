@@ -33,7 +33,7 @@ class _GameScreenState extends State<GameScreen> {
       onConfirm: () => Get.offAll(const GameScreen()),
       textCancel: "Back",
       cancelTextColor: darkColor,
-      onCancel: () => Get.offAll(HomeScreen()),
+      onCancel: () => Get.offAllNamed('/Home'),
       buttonColor: yellowColor,
     );
   }
