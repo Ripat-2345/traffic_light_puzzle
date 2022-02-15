@@ -16,9 +16,9 @@ class GameScreen extends StatefulWidget {
 
 class _GameScreenState extends State<GameScreen> {
   final gameController = Get.put(GameController());
+  final argument = Get.arguments;
   late CountdownTimerController timeController;
   int endTime = DateTime.now().millisecondsSinceEpoch + 1000 * 60;
-  int data = 19;
 
   void onEnd() {
     Get.defaultDialog(
@@ -41,7 +41,19 @@ class _GameScreenState extends State<GameScreen> {
   @override
   void initState() {
     super.initState();
-    gameController.getLamp(data);
+    gameController.getLamp(
+      (argument[0] == "Level 1")
+          ? gameController.trafficLamp.value = 11
+          : (argument[0] == "Level 2")
+              ? gameController.trafficLamp.value = 15
+              : (argument[0] == "Level 3")
+                  ? gameController.trafficLamp.value = 19
+                  : (argument[0] == "Level 4")
+                      ? gameController.trafficLamp.value = 23
+                      : (argument[0] == "Level 5")
+                          ? gameController.trafficLamp.value = 27
+                          : gameController.trafficLamp.value = 0,
+    );
     timeController = CountdownTimerController(endTime: endTime, onEnd: onEnd);
     if (endTime == 0) {
       onEnd();
@@ -118,12 +130,22 @@ class _GameScreenState extends State<GameScreen> {
                       runSpacing: 10,
                       alignment: WrapAlignment.spaceBetween,
                       children: [
-                        for (var i = 1; i <= data; i++)
+                        for (var i = 1;
+                            i <= gameController.trafficLamp.value;
+                            i++)
                           InkWell(
                             onTap: () {
                               gameController.countLamp(i);
-                              gameController.countLamp((i == data) ? 1 : i + 1);
-                              print([i, (i == data) ? 1 : i + 1]);
+                              gameController.countLamp(
+                                  (i == gameController.trafficLamp.value)
+                                      ? 1
+                                      : i + 1);
+                              print([
+                                i,
+                                (i == gameController.trafficLamp.value)
+                                    ? 1
+                                    : i + 1
+                              ]);
                             },
                             child: Container(
                               width: (MediaQuery.of(context).size.width < 800)
@@ -224,10 +246,15 @@ class _GameScreenState extends State<GameScreen> {
                           (MediaQuery.of(context).size.width < 800) ? 200 : 300,
                       height:
                           (MediaQuery.of(context).size.width < 800) ? 120 : 180,
-                      child: Lottie.asset(
-                        "assets/images/car.json",
-                        fit: BoxFit.cover,
-                      ),
+                      child: (argument[1] == null)
+                          ? Lottie.asset(
+                              "assets/images/car.json",
+                              fit: BoxFit.cover,
+                            )
+                          : Lottie.asset(
+                              "assets/images/${argument[1]}",
+                              fit: BoxFit.cover,
+                            ),
                     ),
                   ),
                   Container(

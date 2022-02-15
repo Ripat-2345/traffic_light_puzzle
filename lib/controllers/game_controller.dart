@@ -3,8 +3,8 @@ import 'dart:math';
 import 'package:get/get.dart';
 
 class GameController extends GetxController {
+  var trafficLamp = 0.obs;
   Map<int, RxList> lamp = {};
-
   void getLamp(int count) {
     for (var i = 1; i <= count; i++) {
       lamp[i] = [

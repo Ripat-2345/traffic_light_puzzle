@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-  var selected = "".obs;
+  var selectedLevel = "Pilih Level".obs;
 
   List<String> levels = ["Level 1", "Level 2", "Level 3", "Level 4", "Level 5"];
 
-  List color = [
+  List colors = [
     Colors.red[900],
     Colors.greenAccent,
     Colors.white,
@@ -23,8 +23,8 @@ class HomeController extends GetxController {
   ];
 
   void changeCarColor(Color colorChoose) {
-    for (var i = 0; i < color.length; i++) {
-      if (colorChoose == color[i]) {
+    for (var i = 0; i < colors.length; i++) {
+      if (colorChoose == colors[i]) {
         fileCar.value = cars[i];
         break;
       }

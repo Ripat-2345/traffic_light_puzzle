@@ -42,12 +42,12 @@ class _HomeScreenState extends State<HomeScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              for (var i = 0; i < homeController.color.length; i++)
+              for (var i = 0; i < homeController.colors.length; i++)
                 InkWell(
                   onTap: () =>
-                      homeController.changeCarColor(homeController.color[i]),
+                      homeController.changeCarColor(homeController.colors[i]),
                   child: CarColor(
-                    color: homeController.color[i],
+                    color: homeController.colors[i],
                   ),
                 ),
             ],
@@ -72,10 +72,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: DropdownButton(
                     iconEnabledColor: whiteColor,
                     dropdownColor: darkColor,
-                    hint: Text(
-                      "Pilih level",
-                      style: TextStyle(
-                        color: whiteColor,
+                    hint: Obx(
+                      () => Center(
+                        child: Text(
+                          homeController.selectedLevel.value,
+                          style: TextStyle(
+                            color: whiteColor,
+                          ),
+                        ),
                       ),
                     ),
                     underline: DropdownButtonHideUnderline(
@@ -100,14 +104,20 @@ class _HomeScreenState extends State<HomeScreen> {
                         )
                         .toList(),
                     onChanged: (value) {
-                      homeController.selected.value = value.toString();
+                      homeController.selectedLevel.value = value.toString();
                     },
                   ),
                 ),
               ),
               const SizedBox(width: 30),
               InkWell(
-                onTap: () => Get.to(const GameScreen()),
+                onTap: () => Get.to(
+                  const GameScreen(),
+                  arguments: [
+                    homeController.selectedLevel.value,
+                    homeController.fileCar
+                  ],
+                ),
                 child: Container(
                   height: 40,
                   width: 130,
