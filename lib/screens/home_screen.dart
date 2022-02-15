@@ -33,15 +33,23 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             textAlign: TextAlign.center,
           ),
-          Lottie.asset(
-            "assets/images/car.json",
-            height: (MediaQuery.of(context).size.width < 800) ? 300 : 300,
+          Obx(
+            () => Lottie.asset(
+              "assets/images/${homeController.fileCar}",
+              height: (MediaQuery.of(context).size.width < 800) ? 300 : 300,
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               for (var i = 0; i < homeController.color.length; i++)
-                CarColor(color: homeController.color[i]),
+                InkWell(
+                  onTap: () =>
+                      homeController.changeCarColor(homeController.color[i]),
+                  child: CarColor(
+                    color: homeController.color[i],
+                  ),
+                ),
             ],
           ),
           const SizedBox(

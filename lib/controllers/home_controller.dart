@@ -6,12 +6,28 @@ class HomeController extends GetxController {
 
   List<String> levels = ["Level 1", "Level 2", "Level 3", "Level 4", "Level 5"];
 
-  List<Color> color = [
-    Colors.deepPurpleAccent,
+  List color = [
+    Colors.red[900],
     Colors.greenAccent,
-    Colors.blueAccent,
-    Colors.redAccent
+    Colors.white,
+    Colors.black,
   ];
 
-  void changeCarColor(Color colorChoose) {}
+  var fileCar = "car.json".obs;
+
+  List cars = [
+    "red_car.json",
+    "green_car.json",
+    "white_car.json",
+    "black_car.json",
+  ];
+
+  void changeCarColor(Color colorChoose) {
+    for (var i = 0; i < color.length; i++) {
+      if (colorChoose == color[i]) {
+        fileCar.value = cars[i];
+        break;
+      }
+    }
+  }
 }
