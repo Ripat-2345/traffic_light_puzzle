@@ -15,3 +15,4 @@ class HomeController extends GetxController {
 
   void changeCarColor(Color colorChoose) {}
 }
+  
