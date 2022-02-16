@@ -16,55 +16,6 @@ class GameScreen extends StatefulWidget {
 
 class _GameScreenState extends State<GameScreen> {
   final gameController = Get.put(GameController());
-  final argument = Get.arguments;
-  late CountdownTimerController timeController;
-  int endTime = DateTime.now().millisecondsSinceEpoch + 1000 * 60;
-
-  void onEnd() {
-    Get.defaultDialog(
-      backgroundColor: whiteColor,
-      title: "Time Is Over",
-      titleStyle: TextStyle(color: darkColor, fontSize: 20),
-      content: Lottie.asset("assets/images/clock.json",
-          width: 300, fit: BoxFit.cover),
-      contentPadding: const EdgeInsets.all(10),
-      textConfirm: "Restart",
-      confirmTextColor: darkColor,
-      onConfirm: () => Get.offAll(const GameScreen()),
-      textCancel: "Back",
-      cancelTextColor: darkColor,
-      onCancel: () => Get.offAllNamed('/Home'),
-      buttonColor: yellowColor,
-    );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    gameController.getLamp(
-      (argument[0] == "Level 1")
-          ? gameController.trafficLamp.value = 11
-          : (argument[0] == "Level 2")
-              ? gameController.trafficLamp.value = 15
-              : (argument[0] == "Level 3")
-                  ? gameController.trafficLamp.value = 19
-                  : (argument[0] == "Level 4")
-                      ? gameController.trafficLamp.value = 23
-                      : (argument[0] == "Level 5")
-                          ? gameController.trafficLamp.value = 27
-                          : gameController.trafficLamp.value = 0,
-    );
-    timeController = CountdownTimerController(endTime: endTime, onEnd: onEnd);
-    if (endTime == 0) {
-      onEnd();
-    }
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    timeController.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,21 +39,49 @@ class _GameScreenState extends State<GameScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        "Time: ",
-                        style: TextStyle(
-                          fontSize: 24,
-                          color: yellowColor,
+                      Container(
+                        width: 150,
+                        height: 60,
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: whiteColor.withOpacity(0.5),
                         ),
-                      ),
-                      CountdownTimer(
-                        textStyle: TextStyle(
-                          fontSize: 24,
-                          color: yellowColor,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.timer_rounded,
+                              color: yellowColor,
+                              size: 40,
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            CountdownTimer(
+                              endTime: gameController.remainingTime,
+                              controller: gameController.timeController,
+                              widgetBuilder: (_, time) {
+                                if (time == null) {
+                                  return Text(
+                                    "0 : 00",
+                                    style: TextStyle(
+                                      fontSize: 24,
+                                      color: yellowColor,
+                                    ),
+                                  );
+                                }
+                                return Text(
+                                  "${(time.min == null) ? "0" : time.min} : ${(time.sec == null) ? "0" : time.sec}",
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                    color: yellowColor,
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
                         ),
-                        controller: timeController,
-                        onEnd: onEnd,
-                        endTime: endTime,
                       ),
                     ],
                   ),
@@ -246,13 +225,13 @@ class _GameScreenState extends State<GameScreen> {
                           (MediaQuery.of(context).size.width < 800) ? 200 : 300,
                       height:
                           (MediaQuery.of(context).size.width < 800) ? 120 : 180,
-                      child: (argument[1] == null)
+                      child: (gameController.argument[1] == null)
                           ? Lottie.asset(
                               "assets/images/car.json",
                               fit: BoxFit.cover,
                             )
                           : Lottie.asset(
-                              "assets/images/${argument[1]}",
+                              "assets/images/${gameController.argument[1]}",
                               fit: BoxFit.cover,
                             ),
                     ),

@@ -1,10 +1,38 @@
 import 'dart:math';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_countdown_timer/countdown_timer_controller.dart';
+import 'package:flutter_game/const.dart';
+import 'package:flutter_game/screens/game_screen.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
 class GameController extends GetxController {
+  final _argument = Get.arguments;
+  late CountdownTimerController timeController;
+  int remainingTime = DateTime.now().millisecondsSinceEpoch + 1000 * 90;
   var trafficLamp = 0.obs;
   Map<int, RxList> lamp = {};
+
+  @override
+  void onInit() {
+    super.onInit();
+    selectedLevel(_argument[0]);
+    timeController = CountdownTimerController(
+      endTime: remainingTime,
+      onEnd: onTimeEnded,
+    );
+    (remainingTime == 0) ? onTimeEnded() : null;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    timeController.dispose();
+  }
+
+  get argument => _argument;
+
   void getLamp(int count) {
     for (var i = 1; i <= count; i++) {
       lamp[i] = [
@@ -29,5 +57,42 @@ class GameController extends GetxController {
         break;
       }
     }
+  }
+
+  void selectedLevel(String level) {
+    getLamp(
+      (level == "Level 1")
+          ? trafficLamp.value = 11
+          : (level == "Level 2")
+              ? trafficLamp.value = 15
+              : (level == "Level 3")
+                  ? trafficLamp.value = 19
+                  : (level == "Level 4")
+                      ? trafficLamp.value = 23
+                      : (level == "Level 5")
+                          ? trafficLamp.value = 27
+                          : trafficLamp.value = 0,
+    );
+  }
+
+  void onTimeEnded() {
+    Get.defaultDialog(
+      backgroundColor: whiteColor,
+      title: "Time Is Over",
+      titleStyle: TextStyle(color: darkColor, fontSize: 20),
+      content: Lottie.asset("assets/images/clock.json",
+          width: 300, fit: BoxFit.cover),
+      contentPadding: const EdgeInsets.all(10),
+      textConfirm: "Restart",
+      confirmTextColor: darkColor,
+      onConfirm: () => Get.offAll(
+        const GameScreen(),
+        arguments: [_argument[0], _argument[1]],
+      ),
+      textCancel: "Back",
+      cancelTextColor: darkColor,
+      onCancel: () => Get.offAllNamed('/Home'),
+      buttonColor: yellowColor,
+    );
   }
 }
