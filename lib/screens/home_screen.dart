@@ -33,15 +33,23 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             textAlign: TextAlign.center,
           ),
-          Lottie.asset(
-            "assets/images/car.json",
-            height: (MediaQuery.of(context).size.width < 800) ? 300 : 300,
+          Obx(
+            () => Lottie.asset(
+              "assets/images/${homeController.fileCar}",
+              height: (MediaQuery.of(context).size.width < 800) ? 300 : 300,
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              for (var i = 0; i < homeController.color.length; i++)
-                CarColor(color: homeController.color[i]),
+              for (var i = 0; i < homeController.colors.length; i++)
+                InkWell(
+                  onTap: () =>
+                      homeController.changeCarColor(homeController.colors[i]),
+                  child: CarColor(
+                    color: homeController.colors[i],
+                  ),
+                ),
             ],
           ),
           const SizedBox(
@@ -64,10 +72,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: DropdownButton(
                     iconEnabledColor: whiteColor,
                     dropdownColor: darkColor,
-                    hint: Text(
-                      "Pilih level",
-                      style: TextStyle(
-                        color: whiteColor,
+                    hint: Obx(
+                      () => Center(
+                        child: Text(
+                          homeController.selectedLevel.value,
+                          style: TextStyle(
+                            color: whiteColor,
+                          ),
+                        ),
                       ),
                     ),
                     underline: DropdownButtonHideUnderline(
@@ -92,14 +104,20 @@ class _HomeScreenState extends State<HomeScreen> {
                         )
                         .toList(),
                     onChanged: (value) {
-                      homeController.selected.value = value.toString();
+                      homeController.selectedLevel.value = value.toString();
                     },
                   ),
                 ),
               ),
               const SizedBox(width: 30),
               InkWell(
-                onTap: () => Get.to(const GameScreen()),
+                onTap: () => Get.to(
+                  const GameScreen(),
+                  arguments: [
+                    homeController.selectedLevel.value,
+                    homeController.fileCar
+                  ],
+                ),
                 child: Container(
                   height: 40,
                   width: 130,
