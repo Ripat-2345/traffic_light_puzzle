@@ -31,3 +31,4 @@ class HomeController extends GetxController {
     }
   }
 }
+  
