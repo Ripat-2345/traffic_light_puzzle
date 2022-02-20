@@ -68,6 +68,7 @@ flutter:
     - assets/images/white_car.json
     - assets/images/yellow_car.json
     - assets/images/car.json
+    - assets/images/success.json
     - assets/images/time.json
     - assets/images/clock.json
 

@@ -1,9 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_countdown_timer/countdown_timer_controller.dart';
+import 'package:collection/collection.dart';
+import 'dart:html' as html;
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutter_game/const.dart';
 import 'package:flutter_game/controllers/game_controller.dart';
-import 'package:flutter_game/screens/home_screen.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
@@ -16,6 +17,14 @@ class GameScreen extends StatefulWidget {
 
 class _GameScreenState extends State<GameScreen> {
   final gameController = Get.put(GameController());
+
+  // @override
+  // void initState() {
+  //   html.window.onBeforeUnload.listen((event) async {
+  //     Get.back();
+  //   });
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -119,12 +128,11 @@ class _GameScreenState extends State<GameScreen> {
                                   (i == gameController.trafficLamp.value)
                                       ? 1
                                       : i + 1);
-                              print([
-                                i,
-                                (i == gameController.trafficLamp.value)
-                                    ? 1
-                                    : i + 1
-                              ]);
+                              (DeepCollectionEquality().equals(
+                                      gameController.lamp,
+                                      gameController.lampFinish))
+                                  ? gameController.gameFinish()
+                                  : null;
                             },
                             child: Container(
                               width: (MediaQuery.of(context).size.width < 800)
