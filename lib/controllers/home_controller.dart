@@ -6,7 +6,7 @@ class HomeController extends GetxController {
 
   List<String> levels = ["Level 1", "Level 2", "Level 3", "Level 4", "Level 5"];
 
-  List colors = [
+  List colors = const [
     Color(0XFF1A1A1A),
     Color(0XFF4a90e2),
     Color(0XFF4c7a46),
