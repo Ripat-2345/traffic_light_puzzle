@@ -41,10 +41,8 @@ class GameController extends GetxController {
     for (var i = 1; i <= count; i++) {
       lamp[i] = [
         1,
-        // ((Random().nextInt(2) + 1) == 2) ? 2 : 0,
-        // ((Random().nextInt(3) + 2) == 3) ? 3 : 0,
-        2,
-        3,
+        ((Random().nextInt(2) + 1) == 2) ? 2 : 0,
+        ((Random().nextInt(3) + 2) == 3) ? 3 : 0,
       ].obs;
     }
 
