@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:math';
+import 'dart:html' as html;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/countdown_timer_controller.dart';
 import 'package:flutter_game/const.dart';
-import 'package:flutter_game/screens/game_screen.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
@@ -14,19 +14,23 @@ class GameController extends GetxController {
   late int remainingTime;
   late Timer finish;
   var trafficLamp = 0.obs;
+  var carMove = false.obs;
+  var absorbing = false.obs;
   Map<int, RxList> lamp = {};
   Map<int, RxList> lampFinish = {};
 
   @override
   void onInit() {
     super.onInit();
-    (_argument == null) ? Get.offNamed("/Home") : selectedLevel(_argument[0]);
     remainingTime = DateTime.now().millisecondsSinceEpoch + 1000 * 90;
     timeController = CountdownTimerController(
       endTime: remainingTime,
       onEnd: onTimeEnded,
     );
     (remainingTime == 0) ? onTimeEnded() : null;
+
+    print(_argument);
+    selectedLevel(_argument[0]);
   }
 
   @override
@@ -118,45 +122,53 @@ class GameController extends GetxController {
     levelNow.last = changeLevel.toString();
 
     if (changeLevel == 6) {
-      Get.defaultDialog(
-        barrierDismissible: false,
-        backgroundColor: whiteColor,
-        title: "Congratulations",
-        titleStyle: TextStyle(color: darkColor, fontSize: 20),
-        content: Lottie.asset(
-          "assets/images/success.json",
-          width: 300,
-          fit: BoxFit.cover,
-        ),
-        contentPadding: const EdgeInsets.all(10),
-        textCancel: "Back",
-        cancelTextColor: darkColor,
-        onCancel: () => Get.offAllNamed('/Home'),
-        buttonColor: yellowColor,
-      );
+      absorbing.toggle();
+      carMove.toggle();
+      Future.delayed(const Duration(seconds: 2), () {
+        Get.defaultDialog(
+          barrierDismissible: false,
+          backgroundColor: whiteColor,
+          title: "Congratulations",
+          titleStyle: TextStyle(color: darkColor, fontSize: 20),
+          content: Lottie.asset(
+            "assets/images/success.json",
+            width: 300,
+            fit: BoxFit.cover,
+          ),
+          contentPadding: const EdgeInsets.all(10),
+          textCancel: "Back",
+          cancelTextColor: darkColor,
+          onCancel: () => Get.offAllNamed('/Home'),
+          buttonColor: yellowColor,
+        );
+      });
     } else {
-      Get.defaultDialog(
-        barrierDismissible: false,
-        backgroundColor: whiteColor,
-        title: "Congratulations",
-        titleStyle: TextStyle(color: darkColor, fontSize: 20),
-        content: Lottie.asset(
-          "assets/images/success.json",
-          width: 300,
-          fit: BoxFit.cover,
-        ),
-        contentPadding: const EdgeInsets.all(10),
-        textConfirm: "Next Level",
-        confirmTextColor: darkColor,
-        onConfirm: () => Get.offAllNamed(
-          "/Game",
-          arguments: [levelNow.join(""), _argument[1]],
-        ),
-        textCancel: "Back",
-        cancelTextColor: darkColor,
-        onCancel: () => Get.offAllNamed('/Home'),
-        buttonColor: yellowColor,
-      );
+      absorbing.toggle();
+      carMove.toggle();
+      Future.delayed(const Duration(seconds: 2), () {
+        Get.defaultDialog(
+          barrierDismissible: false,
+          backgroundColor: whiteColor,
+          title: "Congratulations",
+          titleStyle: TextStyle(color: darkColor, fontSize: 20),
+          content: Lottie.asset(
+            "assets/images/success.json",
+            width: 300,
+            fit: BoxFit.cover,
+          ),
+          contentPadding: const EdgeInsets.all(10),
+          textConfirm: "Next Level",
+          confirmTextColor: darkColor,
+          onConfirm: () => Get.offAllNamed(
+            "/Game",
+            arguments: [levelNow.join(""), _argument[1]],
+          ),
+          textCancel: "Back",
+          cancelTextColor: darkColor,
+          onCancel: () => Get.offAllNamed('/Home'),
+          buttonColor: yellowColor,
+        );
+      });
     }
   }
 }
