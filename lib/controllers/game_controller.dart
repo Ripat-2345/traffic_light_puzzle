@@ -41,8 +41,10 @@ class GameController extends GetxController {
     for (var i = 1; i <= count; i++) {
       lamp[i] = [
         1,
-        ((Random().nextInt(2) + 1) == 2) ? 2 : 0,
-        ((Random().nextInt(3) + 2) == 3) ? 3 : 0,
+        // ((Random().nextInt(2) + 1) == 2) ? 2 : 0,
+        // ((Random().nextInt(3) + 2) == 3) ? 3 : 0,
+        2,
+        3,
       ].obs;
     }
 
@@ -113,27 +115,50 @@ class GameController extends GetxController {
   }
 
   void gameFinish() {
-    Get.defaultDialog(
-      barrierDismissible: false,
-      backgroundColor: whiteColor,
-      title: "Congratulations",
-      titleStyle: TextStyle(color: darkColor, fontSize: 20),
-      content: Lottie.asset(
-        "assets/images/success.json",
-        width: 300,
-        fit: BoxFit.cover,
-      ),
-      contentPadding: const EdgeInsets.all(10),
-      // textConfirm: "Restart",
-      // confirmTextColor: darkColor,
-      // onConfirm: () => Get.offAllNamed(
-      //   "/Game",
-      //   arguments: [_argument[0], _argument[1]],
-      // ),
-      textCancel: "Back",
-      cancelTextColor: darkColor,
-      onCancel: () => Get.offAllNamed('/Home'),
-      buttonColor: yellowColor,
-    );
+    var levelNow = _argument[0].split('');
+    var changeLevel = int.parse(levelNow.last) + 1;
+    levelNow.last = changeLevel.toString();
+
+    if (changeLevel == 6) {
+      Get.defaultDialog(
+        barrierDismissible: false,
+        backgroundColor: whiteColor,
+        title: "Congratulations",
+        titleStyle: TextStyle(color: darkColor, fontSize: 20),
+        content: Lottie.asset(
+          "assets/images/success.json",
+          width: 300,
+          fit: BoxFit.cover,
+        ),
+        contentPadding: const EdgeInsets.all(10),
+        textCancel: "Back",
+        cancelTextColor: darkColor,
+        onCancel: () => Get.offAllNamed('/Home'),
+        buttonColor: yellowColor,
+      );
+    } else {
+      Get.defaultDialog(
+        barrierDismissible: false,
+        backgroundColor: whiteColor,
+        title: "Congratulations",
+        titleStyle: TextStyle(color: darkColor, fontSize: 20),
+        content: Lottie.asset(
+          "assets/images/success.json",
+          width: 300,
+          fit: BoxFit.cover,
+        ),
+        contentPadding: const EdgeInsets.all(10),
+        textConfirm: "Next Level",
+        confirmTextColor: darkColor,
+        onConfirm: () => Get.offAllNamed(
+          "/Game",
+          arguments: [levelNow.join(""), _argument[1]],
+        ),
+        textCancel: "Back",
+        cancelTextColor: darkColor,
+        onCancel: () => Get.offAllNamed('/Home'),
+        buttonColor: yellowColor,
+      );
+    }
   }
 }
