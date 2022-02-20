@@ -62,14 +62,14 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/black_car.json
-    - assets/images/green_car.json
-    - assets/images/red_car.json
-    - assets/images/white_car.json
-    - assets/images/yellow_car.json
     - assets/images/car.json
     - assets/images/time.json
     - assets/images/clock.json
+    - assets/images/f5f5f5.json
+    - assets/images/870808.json
+    - assets/images/4c7a46.json
+    - assets/images/4a90e2.json
+    - assets/images/1a1a1a.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

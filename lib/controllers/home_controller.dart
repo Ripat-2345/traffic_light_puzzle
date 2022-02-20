@@ -7,19 +7,21 @@ class HomeController extends GetxController {
   List<String> levels = ["Level 1", "Level 2", "Level 3", "Level 4", "Level 5"];
 
   List colors = [
-    Colors.red[900],
-    Colors.greenAccent,
-    Colors.white,
-    Colors.black,
+    Color(0XFF1A1A1A),
+    Color(0XFF4a90e2),
+    Color(0XFF4c7a46),
+    Color(0XFF870808),
+    Color(0XFFf5f5f5),
   ];
 
-  var fileCar = "car.json".obs;
+  var fileCar = "1a1a1a.json".obs;
 
   List cars = [
-    "red_car.json",
-    "green_car.json",
-    "white_car.json",
-    "black_car.json",
+    "1a1a1a.json",
+    "4a90e2.json",
+    "4c7a46.json",
+    "870808.json",
+    "f5f5f5.json",
   ];
 
   void changeCarColor(Color colorChoose) {
@@ -31,4 +33,3 @@ class HomeController extends GetxController {
     }
   }
 }
-  
