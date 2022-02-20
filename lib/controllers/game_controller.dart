@@ -1,5 +1,6 @@
+import 'dart:async';
 import 'dart:math';
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/countdown_timer_controller.dart';
 import 'package:flutter_game/const.dart';
@@ -10,14 +11,17 @@ import 'package:lottie/lottie.dart';
 class GameController extends GetxController {
   final _argument = Get.arguments;
   late CountdownTimerController timeController;
-  int remainingTime = DateTime.now().millisecondsSinceEpoch + 1000 * 90;
+  late int remainingTime;
+  late Timer finish;
   var trafficLamp = 0.obs;
   Map<int, RxList> lamp = {};
+  Map<int, RxList> lampFinish = {};
 
   @override
   void onInit() {
     super.onInit();
-    selectedLevel(_argument[0]);
+    (_argument == null) ? Get.offNamed("/Home") : selectedLevel(_argument[0]);
+    remainingTime = DateTime.now().millisecondsSinceEpoch + 1000 * 90;
     timeController = CountdownTimerController(
       endTime: remainingTime,
       onEnd: onTimeEnded,
@@ -39,6 +43,14 @@ class GameController extends GetxController {
         1,
         ((Random().nextInt(2) + 1) == 2) ? 2 : 0,
         ((Random().nextInt(3) + 2) == 3) ? 3 : 0,
+      ].obs;
+    }
+
+    for (var i = 1; i <= count; i++) {
+      lampFinish[i] = [
+        1,
+        2,
+        3,
       ].obs;
     }
   }
@@ -77,18 +89,47 @@ class GameController extends GetxController {
 
   void onTimeEnded() {
     Get.defaultDialog(
+      barrierDismissible: false,
       backgroundColor: whiteColor,
       title: "Time Is Over",
       titleStyle: TextStyle(color: darkColor, fontSize: 20),
-      content: Lottie.asset("assets/images/clock.json",
-          width: 300, fit: BoxFit.cover),
+      content: Lottie.asset(
+        "assets/images/clock.json",
+        width: 300,
+        fit: BoxFit.cover,
+      ),
       contentPadding: const EdgeInsets.all(10),
       textConfirm: "Restart",
       confirmTextColor: darkColor,
-      onConfirm: () => Get.offAll(
-        const GameScreen(),
+      onConfirm: () => Get.offAllNamed(
+        "/Game",
         arguments: [_argument[0], _argument[1]],
       ),
+      textCancel: "Back",
+      cancelTextColor: darkColor,
+      onCancel: () => Get.offAllNamed('/Home'),
+      buttonColor: yellowColor,
+    );
+  }
+
+  void gameFinish() {
+    Get.defaultDialog(
+      barrierDismissible: false,
+      backgroundColor: whiteColor,
+      title: "Congratulations",
+      titleStyle: TextStyle(color: darkColor, fontSize: 20),
+      content: Lottie.asset(
+        "assets/images/success.json",
+        width: 300,
+        fit: BoxFit.cover,
+      ),
+      contentPadding: const EdgeInsets.all(10),
+      // textConfirm: "Restart",
+      // confirmTextColor: darkColor,
+      // onConfirm: () => Get.offAllNamed(
+      //   "/Game",
+      //   arguments: [_argument[0], _argument[1]],
+      // ),
       textCancel: "Back",
       cancelTextColor: darkColor,
       onCancel: () => Get.offAllNamed('/Home'),

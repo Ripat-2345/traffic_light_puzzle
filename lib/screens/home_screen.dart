@@ -111,8 +111,8 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const SizedBox(width: 30),
               InkWell(
-                onTap: () => Get.to(
-                  const GameScreen(),
+                onTap: () => Get.toNamed(
+                  "/Game",
                   arguments: [
                     homeController.selectedLevel.value,
                     homeController.fileCar
