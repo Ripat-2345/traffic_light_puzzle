@@ -1,7 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
-import 'dart:html' as html;
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutter_game/const.dart';
 import 'package:flutter_game/controllers/game_controller.dart';
@@ -17,14 +15,6 @@ class GameScreen extends StatefulWidget {
 
 class _GameScreenState extends State<GameScreen> {
   final gameController = Get.put(GameController());
-
-  // @override
-  // void initState() {
-  //   html.window.onBeforeUnload.listen((event) async {
-  //     Get.back();
-  //   });
-  //   super.initState();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -121,98 +111,117 @@ class _GameScreenState extends State<GameScreen> {
                         for (var i = 1;
                             i <= gameController.trafficLamp.value;
                             i++)
-                          InkWell(
-                            onTap: () {
-                              gameController.countLamp(i);
-                              gameController.countLamp(
-                                  (i == gameController.trafficLamp.value)
-                                      ? 1
-                                      : i + 1);
-                              (DeepCollectionEquality().equals(
-                                      gameController.lamp,
-                                      gameController.lampFinish))
-                                  ? gameController.gameFinish()
-                                  : null;
-                            },
-                            child: Container(
-                              width: (MediaQuery.of(context).size.width < 800)
-                                  ? 70
-                                  : 120,
-                              height: (MediaQuery.of(context).size.width < 800)
-                                  ? 35
-                                  : 60,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: darkColor,
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Obx(
-                                    () => Container(
-                                      width:
-                                          (MediaQuery.of(context).size.width <
-                                                  800)
-                                              ? 15
-                                              : 30,
-                                      height:
-                                          (MediaQuery.of(context).size.width <
-                                                  800)
-                                              ? 15
-                                              : 30,
-                                      decoration: BoxDecoration(
-                                        color: (gameController.lamp[i]![0] != 0)
-                                            ? Colors.green
-                                            : Colors.white,
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                      ),
-                                    ),
+                          Obx(
+                            () => AbsorbPointer(
+                              absorbing: gameController.absorbing.value,
+                              child: InkWell(
+                                onTap: () {
+                                  gameController.countLamp(i);
+                                  gameController.countLamp(
+                                      (i == gameController.trafficLamp.value)
+                                          ? 1
+                                          : i + 1);
+                                  (DeepCollectionEquality().equals(
+                                          gameController.lamp,
+                                          gameController.lampFinish))
+                                      ? gameController.gameFinish()
+                                      : null;
+                                },
+                                child: Container(
+                                  width:
+                                      (MediaQuery.of(context).size.width < 800)
+                                          ? 70
+                                          : 120,
+                                  height:
+                                      (MediaQuery.of(context).size.width < 800)
+                                          ? 35
+                                          : 60,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: darkColor,
                                   ),
-                                  Obx(
-                                    () => Container(
-                                      width:
-                                          (MediaQuery.of(context).size.width <
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Obx(
+                                        () => Container(
+                                          width: (MediaQuery.of(context)
+                                                      .size
+                                                      .width <
                                                   800)
                                               ? 15
                                               : 30,
-                                      height:
-                                          (MediaQuery.of(context).size.width <
+                                          height: (MediaQuery.of(context)
+                                                      .size
+                                                      .width <
                                                   800)
                                               ? 15
                                               : 30,
-                                      decoration: BoxDecoration(
-                                        color: (gameController.lamp[i]![1] != 0)
-                                            ? Colors.green
-                                            : Colors.amber,
-                                        borderRadius:
-                                            BorderRadius.circular(100),
+                                          decoration: BoxDecoration(
+                                            color:
+                                                (gameController.lamp[i]![0] !=
+                                                        0)
+                                                    ? Colors.green
+                                                    : Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(100),
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                  ),
-                                  Obx(
-                                    () => Container(
-                                      width:
-                                          (MediaQuery.of(context).size.width <
+                                      Obx(
+                                        () => Container(
+                                          width: (MediaQuery.of(context)
+                                                      .size
+                                                      .width <
                                                   800)
                                               ? 15
                                               : 30,
-                                      height:
-                                          (MediaQuery.of(context).size.width <
+                                          height: (MediaQuery.of(context)
+                                                      .size
+                                                      .width <
                                                   800)
                                               ? 15
                                               : 30,
-                                      decoration: BoxDecoration(
-                                        color: (gameController.lamp[i]![2] != 0)
-                                            ? Colors.green
-                                            : Colors.red,
-                                        borderRadius:
-                                            BorderRadius.circular(100),
+                                          decoration: BoxDecoration(
+                                            color:
+                                                (gameController.lamp[i]![1] !=
+                                                        0)
+                                                    ? Colors.green
+                                                    : Colors.amber,
+                                            borderRadius:
+                                                BorderRadius.circular(100),
+                                          ),
+                                        ),
                                       ),
-                                    ),
+                                      Obx(
+                                        () => Container(
+                                          width: (MediaQuery.of(context)
+                                                      .size
+                                                      .width <
+                                                  800)
+                                              ? 15
+                                              : 30,
+                                          height: (MediaQuery.of(context)
+                                                      .size
+                                                      .width <
+                                                  800)
+                                              ? 15
+                                              : 30,
+                                          decoration: BoxDecoration(
+                                            color:
+                                                (gameController.lamp[i]![2] !=
+                                                        0)
+                                                    ? Colors.green
+                                                    : Colors.red,
+                                            borderRadius:
+                                                BorderRadius.circular(100),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ],
+                                ),
                               ),
                             ),
                           ),
@@ -226,24 +235,29 @@ class _GameScreenState extends State<GameScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: SizedBox(
-                      width:
-                          (MediaQuery.of(context).size.width < 800) ? 200 : 300,
-                      height:
-                          (MediaQuery.of(context).size.width < 800) ? 120 : 180,
-                      child: (gameController.argument[1] == null)
-                          ? Lottie.asset(
-                              "assets/images/car.json",
-                              fit: BoxFit.cover,
-                            )
-                          : Lottie.asset(
-                              "assets/images/${gameController.argument[1]}",
-                              fit: BoxFit.cover,
-                            ),
-                    ),
-                  ),
+                  Obx(() => AnimatedAlign(
+                        duration: const Duration(seconds: 2),
+                        alignment: gameController.carMove.value
+                            ? Alignment.bottomLeft
+                            : Alignment.bottomRight,
+                        child: SizedBox(
+                          width: (MediaQuery.of(context).size.width < 800)
+                              ? 200
+                              : 300,
+                          height: (MediaQuery.of(context).size.width < 800)
+                              ? 120
+                              : 180,
+                          child: (gameController.argument[1] == null)
+                              ? Lottie.asset(
+                                  "assets/images/car.json",
+                                  fit: BoxFit.cover,
+                                )
+                              : Lottie.asset(
+                                  "assets/images/${gameController.argument[1]}",
+                                  fit: BoxFit.cover,
+                                ),
+                        ),
+                      )),
                   Container(
                     margin:
                         const EdgeInsets.only(left: 20, bottom: 20, right: 20),
