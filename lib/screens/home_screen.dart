@@ -1,6 +1,8 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_game/const.dart';
 import 'package:flutter_game/controllers/home_controller.dart';
+import 'package:flutter_game/controllers/slider_controller.dart';
 import 'package:flutter_game/screens/game_screen.dart';
 import 'package:flutter_game/screens/widgets/car_color_widget.dart';
 import 'package:get/get.dart';
@@ -15,6 +17,10 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final homeController = Get.put(HomeController());
+  final sliderController = Get.put(SliderController());
+
+  int _current = 0;
+  final CarouselController _controller = CarouselController();
 
   @override
   Widget build(BuildContext context) {
@@ -150,19 +156,141 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               InkWell(
                 onTap: () {
-                  Get.defaultDialog(
-                    title: "Cara Bermain",
-                    titleStyle: TextStyle(
-                      color: darkColor,
-                      fontSize: 20,
-                    ),
-                    middleText: "Ubah Semua Lampu Menjadi Warna Hijau",
-                    contentPadding: const EdgeInsets.all(20),
-                    onConfirm: () => Get.back(),
-                    textConfirm: "Mengerti",
-                    confirmTextColor: darkColor,
-                    buttonColor: yellowColor,
-                  );
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                            backgroundColor: whiteColor,
+                            title: Center(
+                              child: Text(
+                                "Cara Main",
+                                style: TextStyle(
+                                  color: darkColor,
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ),
+                            contentPadding:
+                                const EdgeInsets.symmetric(vertical: 3.5),
+                            actions: [
+                              Center(
+                                child: RaisedButton(
+                                  color: yellowColor,
+                                  onPressed: () => Get.back(),
+                                  child: Text(
+                                    "Mengerti",
+                                    style: TextStyle(color: darkColor),
+                                  ),
+                                ),
+                              )
+                            ],
+                            content: Container(
+                              child: Column(
+                                children: [
+                                  Expanded(
+                                    child: CarouselSlider(
+                                      carouselController: _controller,
+                                      options: CarouselOptions(
+                                        autoPlay: true,
+                                        enlargeCenterPage: true,
+                                        aspectRatio: 2.0,
+                                        onPageChanged: (index, reason) {
+                                          setState(() {
+                                            _current = index;
+                                          });
+                                        },
+                                      ),
+                                      items: sliderController.imgList
+                                          .map((item) => Container(
+                                                child: Container(
+                                                  margin: EdgeInsets.all(5.0),
+                                                  child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10.0)),
+                                                      child: Stack(
+                                                        children: <Widget>[
+                                                          Image.network(item,
+                                                              fit: BoxFit.cover,
+                                                              width: 1000.0),
+                                                          Positioned(
+                                                            bottom: 0.0,
+                                                            left: 0.0,
+                                                            right: 0.0,
+                                                            child: Container(
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                gradient:
+                                                                    LinearGradient(
+                                                                  colors: [
+                                                                    Color
+                                                                        .fromARGB(
+                                                                            200,
+                                                                            0,
+                                                                            0,
+                                                                            0),
+                                                                    Color
+                                                                        .fromARGB(
+                                                                            0,
+                                                                            0,
+                                                                            0,
+                                                                            0)
+                                                                  ],
+                                                                  begin: Alignment
+                                                                      .bottomCenter,
+                                                                  end: Alignment
+                                                                      .topCenter,
+                                                                ),
+                                                              ),
+                                                              padding: EdgeInsets
+                                                                  .symmetric(
+                                                                      vertical:
+                                                                          10.0,
+                                                                      horizontal:
+                                                                          20.0),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      )),
+                                                ),
+                                              ))
+                                          .toList(),
+                                    ),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: sliderController.imgList
+                                        .asMap()
+                                        .entries
+                                        .map((entry) {
+                                      return GestureDetector(
+                                        onTap: () => _controller
+                                            .animateToPage(entry.key),
+                                        child: Container(
+                                          width: 12.0,
+                                          height: 12.0,
+                                          margin: EdgeInsets.symmetric(
+                                              vertical: 8.0, horizontal: 4.0),
+                                          decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: (Theme.of(context)
+                                                              .brightness ==
+                                                          Brightness.dark
+                                                      ? Colors.white
+                                                      : Colors.black)
+                                                  .withOpacity(
+                                                      _current == entry.key
+                                                          ? 0.9
+                                                          : 0.4)),
+                                        ),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ],
+                              ),
+                            ));
+                      });
                 },
                 child: Text(
                   "Cara Bermain",
@@ -172,9 +300,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-              ),
+              )
             ],
-          )
+          ),
         ],
       ),
     );
