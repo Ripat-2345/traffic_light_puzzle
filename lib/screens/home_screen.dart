@@ -1,12 +1,14 @@
-import 'package:carousel_slider/carousel_slider.dart';
+import 'dart:html';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_game/const.dart';
 import 'package:flutter_game/controllers/home_controller.dart';
 import 'package:flutter_game/controllers/slider_controller.dart';
 import 'package:flutter_game/screens/game_screen.dart';
 import 'package:flutter_game/screens/widgets/car_color_widget.dart';
+import 'package:flutter_game/const.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -18,10 +20,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final homeController = Get.put(HomeController());
   final sliderController = Get.put(SliderController());
-
-  int _current = 0;
   final CarouselController _controller = CarouselController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -174,15 +173,25 @@ class _HomeScreenState extends State<HomeScreen> {
                                 const EdgeInsets.symmetric(vertical: 3.5),
                             actions: [
                               Center(
-                                child: RaisedButton(
-                                  color: yellowColor,
-                                  onPressed: () => Get.back(),
+                                  child: InkWell(
+                                onTap: () => Get.back(),
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  height: 30,
+                                  width: 130,
+                                  decoration: BoxDecoration(
+                                    color: darkColor,
+                                    borderRadius: const BorderRadius.all(
+                                      Radius.circular(7),
+                                    ),
+                                  ),
                                   child: Text(
                                     "Mengerti",
-                                    style: TextStyle(color: darkColor),
+                                    style: TextStyle(
+                                        color: whiteColor, fontSize: 17),
                                   ),
                                 ),
-                              )
+                              ))
                             ],
                             content: Container(
                               child: Column(
@@ -191,15 +200,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                     child: CarouselSlider(
                                       carouselController: _controller,
                                       options: CarouselOptions(
-                                        autoPlay: true,
-                                        enlargeCenterPage: true,
-                                        aspectRatio: 2.0,
-                                        onPageChanged: (index, reason) {
-                                          setState(() {
-                                            _current = index;
-                                          });
-                                        },
-                                      ),
+                                          autoPlay: true,
+                                          aspectRatio: 2.0,
+                                          enlargeCenterPage: true,
+                                          onPageChanged:
+                                              (index, carouseLReason) {
+                                            setState(() {
+                                              sliderController.current = index;
+                                            });
+                                          }),
                                       items: sliderController.imgList
                                           .map((item) => Container(
                                                 child: Container(
@@ -208,7 +217,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       borderRadius:
                                                           BorderRadius.all(
                                                               Radius.circular(
-                                                                  10.0)),
+                                                                  5.0)),
                                                       child: Stack(
                                                         children: <Widget>[
                                                           Image.network(item,
@@ -279,10 +288,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           Brightness.dark
                                                       ? Colors.white
                                                       : Colors.black)
-                                                  .withOpacity(
-                                                      _current == entry.key
-                                                          ? 0.9
-                                                          : 0.4)),
+                                                  .withOpacity(sliderController
+                                                              .current ==
+                                                          entry.key
+                                                      ? 0.9
+                                                      : 0.4)),
                                         ),
                                       );
                                     }).toList(),
