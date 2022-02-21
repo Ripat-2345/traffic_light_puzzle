@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:math';
-import 'dart:html' as html;
-import 'package:flutter/foundation.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/countdown_timer_controller.dart';
 import 'package:flutter_game/const.dart';
@@ -10,8 +9,11 @@ import 'package:lottie/lottie.dart';
 
 class GameController extends GetxController {
   final _argument = Get.arguments;
-  late CountdownTimerController timeController;
-  late int remainingTime;
+  late CountdownTimerController timeController = CountdownTimerController(
+    endTime: remainingTime,
+    onEnd: onTimeEnded,
+  );
+  late int remainingTime = DateTime.now().millisecondsSinceEpoch + 1000 * 90;
   late Timer finish;
   var trafficLamp = 0.obs;
   var carMove = false.obs;
@@ -22,15 +24,15 @@ class GameController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    remainingTime = DateTime.now().millisecondsSinceEpoch + 1000 * 90;
-    timeController = CountdownTimerController(
-      endTime: remainingTime,
-      onEnd: onTimeEnded,
-    );
-    (remainingTime == 0) ? onTimeEnded() : null;
-
-    print(_argument);
-    selectedLevel(_argument[0]);
+    if (_argument == null) {
+      WidgetsBinding.instance!.addPostFrameCallback((_) {
+        timeController.dispose();
+        Get.offAllNamed("/Home");
+      });
+    } else {
+      (remainingTime == 0) ? onTimeEnded() : null;
+      selectedLevel(_argument[0]);
+    }
   }
 
   @override
@@ -40,6 +42,10 @@ class GameController extends GetxController {
   }
 
   get argument => _argument;
+
+  void backToHome() {
+    Get.offAllNamed("/Home");
+  }
 
   void getLamp(int count) {
     for (var i = 1; i <= count; i++) {
@@ -78,15 +84,15 @@ class GameController extends GetxController {
   void selectedLevel(String level) {
     getLamp(
       (level == "Level 1")
-          ? trafficLamp.value = 11
+          ? trafficLamp.value = 15
           : (level == "Level 2")
-              ? trafficLamp.value = 15
+              ? trafficLamp.value = 21
               : (level == "Level 3")
-                  ? trafficLamp.value = 19
+                  ? trafficLamp.value = 27
                   : (level == "Level 4")
-                      ? trafficLamp.value = 23
+                      ? trafficLamp.value = 33
                       : (level == "Level 5")
-                          ? trafficLamp.value = 27
+                          ? trafficLamp.value = 37
                           : trafficLamp.value = 0,
     );
   }
@@ -105,13 +111,19 @@ class GameController extends GetxController {
       contentPadding: const EdgeInsets.all(10),
       textConfirm: "Restart",
       confirmTextColor: darkColor,
-      onConfirm: () => Get.offAllNamed(
-        "/Game",
-        arguments: [_argument[0], _argument[1]],
-      ),
+      onConfirm: () {
+        Get.offAllNamed(
+          "/Game",
+          arguments: [_argument[0], _argument[1]],
+        );
+        timeController.dispose();
+      },
       textCancel: "Back",
       cancelTextColor: darkColor,
-      onCancel: () => Get.offAllNamed('/Home'),
+      onCancel: () {
+        Get.offAllNamed('/Home');
+        timeController.dispose();
+      },
       buttonColor: yellowColor,
     );
   }
@@ -122,6 +134,7 @@ class GameController extends GetxController {
     levelNow.last = changeLevel.toString();
 
     if (changeLevel == 6) {
+      timeController.disposeTimer();
       absorbing.toggle();
       carMove.toggle();
       Future.delayed(const Duration(seconds: 2), () {
@@ -143,6 +156,7 @@ class GameController extends GetxController {
         );
       });
     } else {
+      timeController.disposeTimer();
       absorbing.toggle();
       carMove.toggle();
       Future.delayed(const Duration(seconds: 2), () {
@@ -159,13 +173,19 @@ class GameController extends GetxController {
           contentPadding: const EdgeInsets.all(10),
           textConfirm: "Next Level",
           confirmTextColor: darkColor,
-          onConfirm: () => Get.offAllNamed(
-            "/Game",
-            arguments: [levelNow.join(""), _argument[1]],
-          ),
+          onConfirm: () {
+            Get.offAllNamed(
+              "/Game",
+              arguments: [levelNow.join(""), _argument[1]],
+            );
+            timeController.dispose();
+          },
           textCancel: "Back",
           cancelTextColor: darkColor,
-          onCancel: () => Get.offAllNamed('/Home'),
+          onCancel: () {
+            Get.offAllNamed('/Home');
+            timeController.dispose();
+          },
           buttonColor: yellowColor,
         );
       });

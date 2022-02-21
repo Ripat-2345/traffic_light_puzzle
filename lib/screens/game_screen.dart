@@ -247,7 +247,7 @@ class _GameScreenState extends State<GameScreen> {
                           height: (MediaQuery.of(context).size.width < 800)
                               ? 120
                               : 180,
-                          child: (gameController.argument[1] == null)
+                          child: (gameController.argument == null)
                               ? Lottie.asset(
                                   "assets/images/car.json",
                                   fit: BoxFit.cover,

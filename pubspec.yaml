@@ -72,7 +72,6 @@ flutter:
     - assets/images/4c7a46.json
     - assets/images/4a90e2.json
     - assets/images/1a1a1a.json
-    - assets/images/slider/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
