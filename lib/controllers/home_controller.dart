@@ -60,6 +60,7 @@ class HomeController extends GetxController {
 
   void dialogPlay(BuildContext context) {
     showDialog(
+      barrierDismissible: false,
       context: context,
       builder: (context) {
         return AlertDialog(
@@ -80,7 +81,10 @@ class HomeController extends GetxController {
                 style: TextButton.styleFrom(
                   backgroundColor: yellowColor,
                 ),
-                onPressed: () => Get.back(),
+                onPressed: () {
+                  currentImg.value = 0;
+                  Get.back();
+                },
                 child: Text(
                   "Mengerti",
                   style: TextStyle(color: darkColor),
