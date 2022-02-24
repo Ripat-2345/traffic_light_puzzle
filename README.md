@@ -13,36 +13,33 @@ Developed using these technologies below <br>
 <h2><blockquote> <b> Features </b></blockquote></h2>
 
 1. Select Level
-     <p>Fitur ini berguna untuk memilih level yang sesuai dengan keamampuan penguna. semaikin tinggi level yang dipilih maka semakin sulit pula puzzle diselesaikan </p>
+     <p>This feature is useful for selecting the level that suits the user's abilities. The higher the selected level, the more difficult the puzzle will be solved. </p>
 
 4. Guideline
-     <p>Di dalam game ini kamu akan menemukan fitur guideline yang dicipkatan dengan maksud membantu pengguna untuk memainkannya</p>
+     <p>In this game, you will find guideline feature was made to explain to users how to play this game.</p>
 
 2. Choose car's color
-     <p>Dicipkatannya fitur ini sengaja untuk memberikan kesempatan pada pengguna mengcostumisasi warna mobil sesuai dengan warna favorit mereka.</p>
+     <p>This feature was created intentionally to give users the opportunity to customize the color of the car according to their favorite color.</p>
 
 3. Timer
-     <p>Tak kalah pentingnya, fitur ini membentu pengguna untuk mngetahui berapa lama lagi waktu yang tersisa untuk mereka mengerjakan satu level puzzle sekaligus menjadi tantangan bagi pengguna untuk menyelesaikan game dengan secepat-cepatnya dengan logika yang tepat pula. </p>
+     <p>Equally important, this feature helps users to know how much time is left to finish one puzzle level, as well as is a challenge for users to complete the game quickly with the right logic. </p>
 
 <br>
 
 <h2><blockquote> <b> How to play </b></blockquote></h2>
-Cara memainkan Traffic Light Puzzle terbilang mudah, kamu hanya tinggal mengikuti langkah berikut <br><br>
-
-
 
 <table>
      <tr>
-          <td>1. Pilih level kesulitan puzzle yang ingin kamu mainkan</td>
-          <td>2. Pilih warna mobil yang kamu inginkan (opsional)</td>
+          <td>1. Select the puzzle difficulty level you want to play. the default level will start from level one</td>
+          <td>2. Choose the car's color you want (optional)</td>
      </tr>
      <tr>
           <td><img src="assets/images/ss.jpg" width="100%"/></td>
           <td><img src="assets/images/ss.jpg" width="100%"/></td>
      </tr>
      <tr>
-          <td>3. Tekan tombol start untuk memulai permainan</td>
-          <td>4. Samakanlah semua lampu menjadi warna hijau dengan cara menekan-nekan masing-masing gambar lampu lalu lintas untuk mengubah warnanya. perhatikan pula waktu yang terus bergerak mundur </td>
+          <td>3. Press start button to play the game</td>
+          <td>4. Match all the lights to green by tapping on each traffic light image to change its color. also, pay attention to the time that keeps moving backward </td>
      </tr>
      <tr>
           <td><img src="assets/images/ss.jpg" width="100%"/></td>
@@ -51,7 +48,7 @@ Cara memainkan Traffic Light Puzzle terbilang mudah, kamu hanya tinggal mengikut
      
 </table>
 
-Untuk mengetahui lebih jelas lagi, silakan tonton video demo di bawah ini 
+To find out more clearly, please watch the demo video below! 
 
 https://user-images.githubusercontent.com/85988238/154833892-34831faf-d554-4449-902a-d27b08d32930.mp4
 
