@@ -19,7 +19,7 @@ class _GameScreenState extends State<GameScreen> {
   @override
   Widget build(BuildContext context) {
     return Title(
-      title: "TLP ${gameController.argument[0]}",
+      title: "Traffic Light Puzzle",
       color: whiteColor,
       child: Scaffold(
         backgroundColor: Colors.transparent,
