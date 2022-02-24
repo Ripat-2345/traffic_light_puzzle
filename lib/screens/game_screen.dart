@@ -121,7 +121,7 @@ class _GameScreenState extends State<GameScreen> {
                                       (i == gameController.trafficLamp.value)
                                           ? 1
                                           : i + 1);
-                                  (DeepCollectionEquality().equals(
+                                  (const DeepCollectionEquality().equals(
                                           gameController.lamp,
                                           gameController.lampFinish))
                                       ? gameController.gameFinish()

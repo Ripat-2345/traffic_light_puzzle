@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 class HomeController extends GetxController {
   late final CarouselController carouselController;
-  var selectedLevel = "Pilih Level".obs;
+  var selectedLevel = "Level 1".obs;
   var currentImg = 0.obs;
 
   @override
@@ -95,6 +95,7 @@ class HomeController extends GetxController {
                   carouselController: carouselController,
                   options: CarouselOptions(
                     autoPlay: true,
+                    autoPlayAnimationDuration: const Duration(seconds: 1),
                     enlargeCenterPage: true,
                     aspectRatio: 2.0,
                     onPageChanged: (index, reason) {
@@ -109,35 +110,10 @@ class HomeController extends GetxController {
                             borderRadius: const BorderRadius.all(
                               Radius.circular(10.0),
                             ),
-                            child: Stack(
-                              children: <Widget>[
-                                Image.network(
-                                  item,
-                                  fit: BoxFit.cover,
-                                  width: 1000.0,
-                                ),
-                                Positioned(
-                                  bottom: 0.0,
-                                  left: 0.0,
-                                  right: 0.0,
-                                  child: Container(
-                                    decoration: const BoxDecoration(
-                                      gradient: LinearGradient(
-                                        colors: [
-                                          Color.fromARGB(200, 0, 0, 0),
-                                          Color.fromARGB(0, 0, 0, 0),
-                                        ],
-                                        begin: Alignment.bottomCenter,
-                                        end: Alignment.topCenter,
-                                      ),
-                                    ),
-                                    padding: const EdgeInsets.symmetric(
-                                      vertical: 10.0,
-                                      horizontal: 20.0,
-                                    ),
-                                  ),
-                                ),
-                              ],
+                            child: Image.network(
+                              item,
+                              fit: BoxFit.cover,
+                              width: 1000.0,
                             ),
                           ),
                         ),
@@ -151,19 +127,19 @@ class HomeController extends GetxController {
                   (entry) {
                     return GestureDetector(
                       onTap: () => carouselController.animateToPage(entry.key),
-                      child: Container(
-                        width: 12.0,
-                        height: 12.0,
-                        margin: const EdgeInsets.symmetric(
-                            vertical: 8.0, horizontal: 4.0),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color:
-                              (Theme.of(context).brightness == Brightness.dark
-                                      ? Colors.white
-                                      : Colors.black)
-                                  .withOpacity(
-                            (currentImg.value == entry.key) ? 0.9 : 0.4,
+                      child: Obx(
+                        () => Container(
+                          width: 12.0,
+                          height: 12.0,
+                          margin: const EdgeInsets.symmetric(
+                            vertical: 8.0,
+                            horizontal: 4.0,
+                          ),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: (currentImg.value == entry.key)
+                                ? Colors.black
+                                : Colors.black26,
                           ),
                         ),
                       ),

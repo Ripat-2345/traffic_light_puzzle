@@ -43,10 +43,6 @@ class GameController extends GetxController {
 
   get argument => _argument;
 
-  void backToHome() {
-    Get.offAllNamed("/Home");
-  }
-
   void getLamp(int count) {
     for (var i = 1; i <= count; i++) {
       lamp[i] = [
@@ -141,7 +137,7 @@ class GameController extends GetxController {
         Get.defaultDialog(
           barrierDismissible: false,
           backgroundColor: whiteColor,
-          title: "Congratulations",
+          title: "${_argument[0]} Finish",
           titleStyle: TextStyle(color: darkColor, fontSize: 20),
           content: Lottie.asset(
             "assets/images/success.json",
@@ -163,7 +159,7 @@ class GameController extends GetxController {
         Get.defaultDialog(
           barrierDismissible: false,
           backgroundColor: whiteColor,
-          title: "Congratulations",
+          title: "${_argument[0]} Finish",
           titleStyle: TextStyle(color: darkColor, fontSize: 20),
           content: Lottie.asset(
             "assets/images/success.json",

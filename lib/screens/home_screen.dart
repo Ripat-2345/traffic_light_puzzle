@@ -59,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
               InkWell(
                 child: Container(
                   height: 40,
-                  width: 130,
+                  width: 120,
                   padding: const EdgeInsets.all(5),
                   decoration: BoxDecoration(
                     color: darkColor,
@@ -67,43 +67,47 @@ class _HomeScreenState extends State<HomeScreen> {
                       Radius.circular(7),
                     ),
                   ),
-                  child: DropdownButton(
-                    iconEnabledColor: whiteColor,
-                    dropdownColor: darkColor,
-                    hint: Obx(
-                      () => Center(
-                        child: Text(
+                  child: Center(
+                    child: DropdownButton(
+                      iconEnabledColor: whiteColor,
+                      dropdownColor: darkColor,
+                      hint: Obx(
+                        () => Text(
                           homeController.selectedLevel.value,
                           style: TextStyle(
                             color: whiteColor,
+                            fontSize: (MediaQuery.of(context).size.width < 800)
+                                ? 20
+                                : 17,
                           ),
+                          textAlign: TextAlign.center,
                         ),
                       ),
-                    ),
-                    underline: DropdownButtonHideUnderline(
-                      child: Container(),
-                    ),
-                    items: homeController.levels
-                        .map(
-                          (e) => DropdownMenuItem(
-                            value: e,
-                            child: Text(
-                              e,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: whiteColor,
-                                fontSize:
-                                    (MediaQuery.of(context).size.width < 800)
-                                        ? 20
-                                        : 17,
+                      underline: DropdownButtonHideUnderline(
+                        child: Container(),
+                      ),
+                      items: homeController.levels
+                          .map(
+                            (e) => DropdownMenuItem(
+                              value: e,
+                              child: Text(
+                                e,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: whiteColor,
+                                  fontSize:
+                                      (MediaQuery.of(context).size.width < 800)
+                                          ? 20
+                                          : 17,
+                                ),
                               ),
                             ),
-                          ),
-                        )
-                        .toList(),
-                    onChanged: (value) {
-                      homeController.selectedLevel.value = value.toString();
-                    },
+                          )
+                          .toList(),
+                      onChanged: (value) {
+                        homeController.selectedLevel.value = value.toString();
+                      },
+                    ),
                   ),
                 ),
               ),
