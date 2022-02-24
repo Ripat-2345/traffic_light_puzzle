@@ -2,7 +2,7 @@
 
 Traffic Light Puzzle is a puzzle game that trains the user's logic to match the colors of a series of connected traffic lights with a certain time limit.
 
-Dikembangkan dengan menggunakan teknologi <br>
+Developed using these technologies below <br>
 
 <a href="https://dart.dev/"><img src = "assets/images/dart.png" style="width:3%; margin-right:30px" alt="Dart"></a> &nbsp; &nbsp; &nbsp; &nbsp;
 <a href="https://flutter.dev/"><img src = "assets/images/logoflutter.jpg"  alt="Flutter" style="width:3%; margin-right:30px" ></a> &nbsp; &nbsp; &nbsp; &nbsp;
@@ -13,16 +13,16 @@ Dikembangkan dengan menggunakan teknologi <br>
 <h2><blockquote> <b> Features </b></blockquote></h2>
 
 1. Select Level
-     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam maximus ornare augue, ut viverra eros sagittis vitae. Proin ac enim scelerisque, sollicitudin odio id, imperdiet massa. Sed sit amet rhoncus est.</p>
+     <p>Fitur ini berguna untuk memilih level yang sesuai dengan keamampuan penguna. semaikin tinggi level yang dipilih maka semakin sulit pula puzzle diselesaikan </p>
 
-4. Guidline
-     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam maximus ornare augue, ut viverra eros sagittis vitae. Proin ac enim scelerisque, sollicitudin odio id, imperdiet massa. Sed sit amet rhoncus est.</p>
+4. Guideline
+     <p>Di dalam game ini kamu akan menemukan fitur guideline yang dicipkatan dengan maksud membantu pengguna untuk memainkannya</p>
 
 2. Choose car's color
-     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam maximus ornare augue, ut viverra eros sagittis vitae. Proin ac enim scelerisque, sollicitudin odio id, imperdiet massa. Sed sit amet rhoncus est.</p>
+     <p>Dicipkatannya fitur ini sengaja untuk memberikan kesempatan pada pengguna mengcostumisasi warna mobil sesuai dengan warna favorit mereka.</p>
 
 3. Timer
-     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam maximus ornare augue, ut viverra eros sagittis vitae. Proin ac enim scelerisque, sollicitudin odio id, imperdiet massa. Sed sit amet rhoncus est.</p>
+     <p>Tak kalah pentingnya, fitur ini membentu pengguna untuk mngetahui berapa lama lagi waktu yang tersisa untuk mereka mengerjakan satu level puzzle sekaligus menjadi tantangan bagi pengguna untuk menyelesaikan game dengan secepat-cepatnya dengan logika yang tepat pula. </p>
 
 <br>
 

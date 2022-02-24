@@ -137,7 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     child: Text(
-                      "Start Game",
+                      "Start",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: whiteColor,
@@ -158,7 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 InkWell(
                   onTap: () => homeController.dialogPlay(context),
                   child: Text(
-                    "How to play!",
+                    "The Guideline",
                     style: TextStyle(
                       color: darkColor,
                       fontSize: 16,
