@@ -66,7 +66,7 @@ class HomeController extends GetxController {
           backgroundColor: whiteColor,
           title: Center(
             child: Text(
-              "The Guideline",
+              "How To Play?",
               style: TextStyle(
                 color: darkColor,
                 fontSize: 20,
@@ -85,7 +85,7 @@ class HomeController extends GetxController {
                   Get.back();
                 },
                 child: Text(
-                  "I understand",
+                  "I Got It!",
                   style: TextStyle(color: darkColor),
                 ),
               ),
@@ -98,7 +98,8 @@ class HomeController extends GetxController {
                   carouselController: carouselController,
                   options: CarouselOptions(
                     autoPlay: true,
-                    autoPlayAnimationDuration: const Duration(seconds: 1),
+                    autoPlayAnimationDuration:
+                        const Duration(milliseconds: 2750),
                     enlargeCenterPage: true,
                     aspectRatio: 2.2,
                     onPageChanged: (index, reason) {
@@ -115,7 +116,7 @@ class HomeController extends GetxController {
                             ),
                             child: Image.network(
                               item,
-                              fit: BoxFit.cover,
+                              // fit: BoxFit.contain,
                               width: 1000.0,
                             ),
                           ),
