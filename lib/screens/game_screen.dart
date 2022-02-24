@@ -96,10 +96,10 @@ class _GameScreenState extends State<GameScreen> {
                         margin: EdgeInsets.only(
                           left: (MediaQuery.of(context).size.width < 800)
                               ? 10
-                              : 300,
+                              : 50,
                           right: (MediaQuery.of(context).size.width < 800)
                               ? 10
-                              : 300,
+                              : 50,
                         ),
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
@@ -139,12 +139,12 @@ class _GameScreenState extends State<GameScreen> {
                                           (MediaQuery.of(context).size.width <
                                                   800)
                                               ? 70
-                                              : 120,
+                                              : 100,
                                       height:
                                           (MediaQuery.of(context).size.width <
                                                   800)
                                               ? 35
-                                              : 60,
+                                              : 40,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
                                         color: darkColor,
@@ -160,13 +160,13 @@ class _GameScreenState extends State<GameScreen> {
                                                           .width <
                                                       800)
                                                   ? 15
-                                                  : 30,
+                                                  : 25,
                                               height: (MediaQuery.of(context)
                                                           .size
                                                           .width <
                                                       800)
                                                   ? 15
-                                                  : 30,
+                                                  : 25,
                                               decoration: BoxDecoration(
                                                 color: (gameController
                                                             .lamp[i]![0] !=
@@ -185,13 +185,13 @@ class _GameScreenState extends State<GameScreen> {
                                                           .width <
                                                       800)
                                                   ? 15
-                                                  : 30,
+                                                  : 25,
                                               height: (MediaQuery.of(context)
                                                           .size
                                                           .width <
                                                       800)
                                                   ? 15
-                                                  : 30,
+                                                  : 25,
                                               decoration: BoxDecoration(
                                                 color: (gameController
                                                             .lamp[i]![1] !=
@@ -210,13 +210,13 @@ class _GameScreenState extends State<GameScreen> {
                                                           .width <
                                                       800)
                                                   ? 15
-                                                  : 30,
+                                                  : 25,
                                               height: (MediaQuery.of(context)
                                                           .size
                                                           .width <
                                                       800)
                                                   ? 15
-                                                  : 30,
+                                                  : 25,
                                               decoration: BoxDecoration(
                                                 color: (gameController
                                                             .lamp[i]![2] !=

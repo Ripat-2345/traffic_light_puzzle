@@ -86,15 +86,15 @@ class GameController extends GetxController {
   void selectedLevel(String level) {
     getLamp(
       (level == "Level 1")
-          ? trafficLamp.value = 15
+          ? trafficLamp.value = 19
           : (level == "Level 2")
-              ? trafficLamp.value = 21
+              ? trafficLamp.value = 23
               : (level == "Level 3")
-                  ? trafficLamp.value = 27
+                  ? trafficLamp.value = 29
                   : (level == "Level 4")
                       ? trafficLamp.value = 33
                       : (level == "Level 5")
-                          ? trafficLamp.value = 37
+                          ? trafficLamp.value = 39
                           : trafficLamp.value = 0,
     );
   }
