@@ -120,7 +120,7 @@ class GameController extends GetxController {
         );
         timeController.dispose();
       },
-      textCancel: "Back",
+      textCancel: "Back To Home",
       cancelTextColor: darkColor,
       onCancel: () {
         Get.offAllNamed('/Home');
@@ -151,7 +151,7 @@ class GameController extends GetxController {
             fit: BoxFit.cover,
           ),
           contentPadding: const EdgeInsets.all(10),
-          textCancel: "Back",
+          textCancel: "Back To Home",
           cancelTextColor: darkColor,
           onCancel: () => Get.offAllNamed('/Home'),
           buttonColor: yellowColor,
@@ -182,7 +182,7 @@ class GameController extends GetxController {
             );
             timeController.dispose();
           },
-          textCancel: "Back",
+          textCancel: "Back To Home",
           cancelTextColor: darkColor,
           onCancel: () {
             Get.offAllNamed('/Home');
