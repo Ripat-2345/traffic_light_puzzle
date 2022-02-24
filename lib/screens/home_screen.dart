@@ -175,7 +175,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     "Watch Tutorial",
                     style: TextStyle(
                       color: darkColor,
-                      fontSize: 16,
+                      fontSize: 15.5,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
