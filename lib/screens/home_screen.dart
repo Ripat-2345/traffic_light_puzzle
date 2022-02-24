@@ -17,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Title(
-      title: "Home",
+      title: "Traffic Light Puzzle",
       color: whiteColor,
       child: Scaffold(
         backgroundColor: yellowColor,

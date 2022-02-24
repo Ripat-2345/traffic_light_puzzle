@@ -41,6 +41,12 @@ class GameController extends GetxController {
     timeController.dispose();
   }
 
+  Future<bool> onWillPop() {
+    Get.offAllNamed("/Home");
+    timeController.dispose();
+    return Future(() => true);
+  }
+
   get argument => _argument;
 
   void getLamp(int count) {
