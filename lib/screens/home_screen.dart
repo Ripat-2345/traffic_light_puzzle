@@ -165,6 +165,20 @@ class _HomeScreenState extends State<HomeScreen> {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
+                ),
+                const SizedBox(
+                  width: 17,
+                ),
+                InkWell(
+                  onTap: () {},
+                  child: Text(
+                    "Watch Tutorial",
+                    style: TextStyle(
+                      color: darkColor,
+                      fontSize: 15.5,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
                 )
               ],
             ),
