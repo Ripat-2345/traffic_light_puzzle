@@ -4,6 +4,7 @@ import 'package:flutter_game/screens/widgets/car_color_widget.dart';
 import 'package:flutter_game/const.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'dart:html' as html;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -176,7 +177,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () => html.window.open(
+                      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+                      "Demo Game"),
                   child: Text(
                     "Watch Demo Video",
                     style: TextStyle(
