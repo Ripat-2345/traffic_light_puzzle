@@ -158,25 +158,32 @@ class _HomeScreenState extends State<HomeScreen> {
                 InkWell(
                   onTap: () => homeController.dialogPlay(context),
                   child: Text(
-                    "How To Play?",
+                    "How To Play",
                     style: TextStyle(
                       color: darkColor,
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
+                      decoration: TextDecoration.underline,
                     ),
                   ),
                 ),
-                const SizedBox(
-                  width: 17,
+                Text(
+                  " or ",
+                  style: TextStyle(
+                    color: darkColor,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
                 InkWell(
                   onTap: () {},
                   child: Text(
-                    "Watch Tutorial",
+                    "Watch Demo Video",
                     style: TextStyle(
                       color: darkColor,
-                      fontSize: 15.5,
+                      fontSize: 16,
                       fontWeight: FontWeight.w400,
+                      decoration: TextDecoration.underline,
                     ),
                   ),
                 )
