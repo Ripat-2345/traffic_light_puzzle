@@ -151,6 +151,14 @@ class GameController extends GetxController {
             fit: BoxFit.cover,
           ),
           contentPadding: const EdgeInsets.all(10),
+          textConfirm: "Send Your Feedback",
+          confirmTextColor: darkColor,
+          onConfirm: () {
+            Get.offAllNamed(
+              "/FeedBack",
+            );
+            timeController.dispose();
+          },
           textCancel: "Back To Home",
           cancelTextColor: darkColor,
           onCancel: () => Get.offAllNamed('/Home'),

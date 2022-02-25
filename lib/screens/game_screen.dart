@@ -249,22 +249,76 @@ class _GameScreenState extends State<GameScreen> {
                             alignment: gameController.carMove.value
                                 ? Alignment.bottomLeft
                                 : Alignment.bottomRight,
-                            child: SizedBox(
-                              width: (MediaQuery.of(context).size.width < 800)
-                                  ? 200
-                                  : 300,
-                              height: (MediaQuery.of(context).size.width < 800)
-                                  ? 120
-                                  : 180,
-                              child: (gameController.argument == null)
-                                  ? Lottie.asset(
-                                      "assets/images/car.json",
-                                      fit: BoxFit.cover,
-                                    )
-                                  : Lottie.asset(
-                                      "assets/images/${gameController.argument[1]}",
-                                      fit: BoxFit.cover,
-                                    ),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Obx(() => (gameController.carMove.value)
+                                    ? const SizedBox()
+                                    : Container(
+                                        width: 40,
+                                        height: 100,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          color: darkColor,
+                                          border:
+                                              Border.all(color: Colors.grey),
+                                        ),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Container(
+                                              width: 25,
+                                              height: 25,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(100),
+                                                color: Colors.green,
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 25,
+                                              height: 25,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(100),
+                                                color: yellowColor,
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 25,
+                                              height: 25,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(100),
+                                                color: Colors.red,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      )),
+                                SizedBox(
+                                  width:
+                                      (MediaQuery.of(context).size.width < 800)
+                                          ? 200
+                                          : 300,
+                                  height:
+                                      (MediaQuery.of(context).size.width < 800)
+                                          ? 120
+                                          : 180,
+                                  child: (gameController.argument == null)
+                                      ? Lottie.asset(
+                                          "assets/images/car.json",
+                                          fit: BoxFit.cover,
+                                        )
+                                      : Lottie.asset(
+                                          "assets/images/${gameController.argument[1]}",
+                                          fit: BoxFit.cover,
+                                        ),
+                                ),
+                              ],
                             ),
                           )),
                       Container(

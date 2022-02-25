@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_game/controllers/game_controller.dart';
+import 'package:flutter_game/screens/feed_back_screen.dart';
 import 'package:flutter_game/screens/game_screen.dart';
 import 'package:get/get.dart';
 
@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(name: '/Home', page: () => const HomeScreen()),
         GetPage(name: '/Game', page: () => const GameScreen()),
+        GetPage(name: '/FeedBack', page: () => const FeedBackScreen()),
       ],
       home: const HomeScreen(),
     );
