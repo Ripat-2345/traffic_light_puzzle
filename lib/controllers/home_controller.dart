@@ -41,11 +41,15 @@ class HomeController extends GetxController {
   ];
 
   List imgList = [
-    'assets/images/guideline1.png',
-    'assets/images/guideline2.png',
-    'assets/images/guideline3.png',
-    'assets/images/guideline4.png',
-    'assets/images/guideline5.png',
+    'assets/images/howtoplay1.png',
+    'assets/images/howtoplay2.png',
+    'assets/images/howtoplay3.png',
+    'assets/images/howtoplay4.png',
+    'assets/images/howtoplay5.png',
+    'assets/images/howtoplay6.png',
+    'assets/images/howtoplay7.png',
+    'assets/images/howtoplay8.png',
+    'assets/images/howtoplay9.png',
   ];
 
   void changeCarColor(Color colorChoose) {

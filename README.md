@@ -34,16 +34,16 @@ Developed using these technologies below <br>
           <td>2. Choose the car's color you want (optional)</td>
      </tr>
      <tr>
-          <td><img src="assets/images/guideline1.png" width="100%"/></td>
-          <td><img src="assets/images/guideline2.png" width="100%"/></td>
+          <td><img src="assets/images/howtoplay2.png" width="100%"/></td>
+          <td><img src="assets/images/howtoplay3.png" width="100%"/></td>
      </tr>
      <tr>
           <td>3. Press start button to play the game</td>
           <td>4. Match all the lights to green by tapping on each traffic light image to change its color. also, pay attention to the time that keeps moving backward </td>
      </tr>
      <tr>
-          <td><img src="assets/images/guideline4.png" width="100%"/></td>
-          <td><img src="assets/images/guideline5.png" width="100%"/></td>
+          <td><img src="assets/images/howtoplay4.png" width="100%"/></td>
+          <td><img src="assets/images/howtoplay5.png" width="100%"/></td>
      </tr>
      
 </table>
