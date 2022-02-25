@@ -4,9 +4,9 @@ Traffic Light Puzzle is a puzzle game that trains the user's logic to match the 
 
 Developed using these technologies below <br>
 
-<a href="https://dart.dev/"><img src = "assets/images/dart.png" style="width:3%; margin-right:30px" alt="Dart"></a> &nbsp; &nbsp; &nbsp; &nbsp;
-<a href="https://flutter.dev/"><img src = "assets/images/logoflutter.jpg"  alt="Flutter" style="width:3%; margin-right:30px" ></a> &nbsp; &nbsp; &nbsp; &nbsp;
-<a href="https://lottiefiles.com//"><img src = "assets/images/lottie.svg" alt="Lottie Files" style="width:3%; margin-right:30px" ></a> &nbsp; &nbsp; &nbsp; &nbsp;
+<a href="https://dart.dev/"><img src = "assets/images/dart.png" style="width:7%; margin-right:30px" alt="Dart"></a> &nbsp; &nbsp; &nbsp; &nbsp;
+<a href="https://flutter.dev/"><img src = "assets/images/logoflutter.jpg"  alt="Flutter" style="width:7%; margin-right:30px" ></a> &nbsp; &nbsp; &nbsp; &nbsp;
+<a href="https://lottiefiles.com//"><img src = "assets/images/lottie.svg" alt="Lottie Files" style="width:7%; margin-right:30px" ></a> &nbsp; &nbsp; &nbsp; &nbsp;
 
 <br>
 
