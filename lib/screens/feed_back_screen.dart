@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_game/const.dart';
+import 'package:flutter_game/controllers/feed_back_controller.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 class FeedBackScreen extends StatelessWidget {
-  const FeedBackScreen({Key? key}) : super(key: key);
+  FeedBackScreen({Key? key}) : super(key: key);
+  final controller = Get.put(FeedBackController());
 
   @override
   Widget build(BuildContext context) {
@@ -14,120 +16,152 @@ class FeedBackScreen extends StatelessWidget {
         return Future(() => true);
       },
       child: Scaffold(
+        backgroundColor: yellowColor,
         body: Center(
           child: Padding(
-            padding: const EdgeInsets.all(30),
+            padding: EdgeInsets.symmetric(horizontal: Get.width / 5),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Stack(
-                  children: [
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Container(
-                        width: 300,
-                        padding: const EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: yellowColor),
-                        child: Center(
-                          child: Text(
-                            "Give Your Feedback",
-                            style: TextStyle(
-                              color: darkColor,
-                              fontSize: 24,
+                Container(
+                  width: 300,
+                  padding: const EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: darkColor,
+                  ),
+                  child: Center(
+                    child: Text(
+                      "Give Your Feedback",
+                      style: TextStyle(
+                        color: yellowColor,
+                        fontSize: 24,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  width: Get.width / 2,
+                  height: 500,
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: darkColor,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      SizedBox(
+                        height: 50,
+                        width: double.infinity,
+                        child: TextField(
+                          controller: controller.nameC,
+                          style: TextStyle(color: whiteColor),
+                          decoration: InputDecoration(
+                            hintText: "Name",
+                            hintStyle: TextStyle(
+                              color: whiteColor.withOpacity(0.5),
+                              fontSize: 16,
+                            ),
+                            fillColor: blueColor,
+                            filled: true,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(color: whiteColor),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(color: yellowColor),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    Positioned(
-                      bottom: 100,
-                      child: SizedBox(
-                        width: 200,
-                        child: Lottie.asset(
-                          "assets/images/car.json",
-                          fit: BoxFit.cover,
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      SizedBox(
+                        height: 50,
+                        width: double.infinity,
+                        child: TextField(
+                          controller: controller.emailC,
+                          style: TextStyle(color: whiteColor),
+                          decoration: InputDecoration(
+                            hintText: "Email",
+                            hintStyle: TextStyle(
+                              color: whiteColor.withOpacity(0.5),
+                              fontSize: 16,
+                            ),
+                            fillColor: blueColor,
+                            filled: true,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(color: whiteColor),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(color: yellowColor),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                SizedBox(
-                  height: 50,
-                  width: 500,
-                  child: TextField(
-                    style: TextStyle(color: darkColor),
-                    decoration: InputDecoration(
-                      hintText: "Name",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(color: darkColor),
+                      const SizedBox(
+                        height: 20,
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(color: yellowColor),
+                      SizedBox(
+                        height: 200,
+                        width: double.infinity,
+                        child: TextField(
+                          controller: controller.descC,
+                          maxLines: 10,
+                          style: TextStyle(color: whiteColor),
+                          decoration: InputDecoration(
+                            hintText: "Your FeedBack",
+                            hintStyle: TextStyle(
+                              color: whiteColor.withOpacity(0.5),
+                              fontSize: 16,
+                            ),
+                            fillColor: blueColor,
+                            filled: true,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(color: yellowColor),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(color: yellowColor),
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                SizedBox(
-                  height: 50,
-                  width: 500,
-                  child: TextField(
-                    style: TextStyle(color: darkColor),
-                    decoration: InputDecoration(
-                      hintText: "Email",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(color: darkColor),
+                      const SizedBox(
+                        height: 30,
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(color: yellowColor),
+                      SizedBox(
+                        width: 100,
+                        height: 40,
+                        child: ElevatedButton(
+                          onPressed: () => controller.sendFeedBack(
+                            controller.nameC.text,
+                            controller.emailC.text,
+                            controller.descC.text,
+                          ),
+                          style: TextButton.styleFrom(
+                            backgroundColor: yellowColor,
+                          ),
+                          child: Text(
+                            "Send",
+                            style: TextStyle(
+                              color: darkColor,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                SizedBox(
-                  height: 200,
-                  width: 500,
-                  child: TextField(
-                    maxLines: 10,
-                    style: TextStyle(color: darkColor),
-                    decoration: InputDecoration(
-                      hintText: "Your FeedBack",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(color: darkColor),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(color: yellowColor),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text(
-                    "Send",
-                    style: TextStyle(
-                      color: darkColor,
-                      fontSize: 20,
-                    ),
+                    ],
                   ),
                 ),
               ],
