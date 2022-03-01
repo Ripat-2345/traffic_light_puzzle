@@ -144,11 +144,33 @@ class FeedBackScreen extends StatelessWidget {
                         width: 100,
                         height: 40,
                         child: ElevatedButton(
-                          onPressed: () => controller.sendFeedBack(
-                            controller.nameC.text,
-                            controller.emailC.text,
-                            controller.descC.text,
-                          ),
+                          onPressed: () {
+                            if ((controller.nameC.text != "") &&
+                                (controller.emailC.text != "") &&
+                                (GetUtils.isEmail(controller.emailC.text)) &&
+                                (controller.descC.text != "")) {
+                              controller.sendFeedBack(
+                                controller.nameC.text,
+                                controller.emailC.text,
+                                controller.descC.text,
+                              );
+                            } else {
+                              Get.defaultDialog(
+                                barrierDismissible: false,
+                                title: "System Error",
+                                titleStyle:
+                                    TextStyle(color: darkColor, fontSize: 26),
+                                middleText:
+                                    "Sorry all fields cannot be empty and the email field must be email",
+                                middleTextStyle:
+                                    TextStyle(color: darkColor, fontSize: 18),
+                                textConfirm: "Ok",
+                                confirmTextColor: darkColor,
+                                onConfirm: () => Get.back(),
+                                buttonColor: yellowColor,
+                              );
+                            }
+                          },
                           style: TextButton.styleFrom(
                             backgroundColor: yellowColor,
                           ),
