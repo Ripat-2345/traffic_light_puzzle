@@ -189,9 +189,29 @@ class _HomeScreenState extends State<HomeScreen> {
                       decoration: TextDecoration.underline,
                     ),
                   ),
-                )
+                ),
               ],
             ),
+            const SizedBox(
+              height: 7,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                InkWell(
+                  onTap: () => Get.toNamed('/FeedBack'),
+                  child: Text(
+                    "Give Your Feedback!",
+                    style: TextStyle(
+                      color: darkColor,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),
