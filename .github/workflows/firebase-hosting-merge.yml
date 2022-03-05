@@ -17,9 +17,9 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_TRAFFIC_LIGHT_PUZZLE }}'
           channelId: live
           projectId: traffic-light-puzzle
-          
+
       - name: Deploy to Firebase Hosting
-        uses: w9jds/firebase-action@master
+        uses: w9jds/firebase-action@main
         with:
           args: deploy --only hosting:traffic-light-puzzle
         env:
