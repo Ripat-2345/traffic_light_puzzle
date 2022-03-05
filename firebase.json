@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/directoryThatContainsIndexHtml",
+    "public": "build/web/",
     "ignore": [
       "firebase.json",
       "**/.*",
