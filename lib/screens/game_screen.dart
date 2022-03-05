@@ -282,13 +282,13 @@ class _GameScreenState extends State<GameScreen> {
                                                           .size
                                                           .width <
                                                       800)
-                                                  ? 10
+                                                  ? 9
                                                   : 25,
                                               height: (MediaQuery.of(context)
                                                           .size
                                                           .width <
                                                       800)
-                                                  ? 10
+                                                  ? 9
                                                   : 25,
                                               decoration: BoxDecoration(
                                                 borderRadius:
@@ -301,13 +301,13 @@ class _GameScreenState extends State<GameScreen> {
                                                           .size
                                                           .width <
                                                       800)
-                                                  ? 10
+                                                  ? 9
                                                   : 25,
                                               height: (MediaQuery.of(context)
                                                           .size
                                                           .width <
                                                       800)
-                                                  ? 10
+                                                  ? 9
                                                   : 25,
                                               decoration: BoxDecoration(
                                                 borderRadius:
@@ -320,13 +320,13 @@ class _GameScreenState extends State<GameScreen> {
                                                           .size
                                                           .width <
                                                       800)
-                                                  ? 10
+                                                  ? 9
                                                   : 25,
                                               height: (MediaQuery.of(context)
                                                           .size
                                                           .width <
                                                       800)
-                                                  ? 10
+                                                  ? 9
                                                   : 25,
                                               decoration: BoxDecoration(
                                                 borderRadius:
