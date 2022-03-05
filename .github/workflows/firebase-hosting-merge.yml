@@ -18,9 +18,15 @@ jobs:
           channelId: live
           projectId: traffic-light-puzzle
           
-      - name: Deploy to Firebase Hosting
-        uses: w9jds/firebase-action@master
+      - name: Cypress install
+        uses: cypress-io/github-action@v2
         with:
-          args: deploy --only hosting:traffic-light-puzzle
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          runTests: false
+
+      # now run the tests from the subfolder
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          install: false
+          working-directory: packages/e2e
+          start: yarn start-server
