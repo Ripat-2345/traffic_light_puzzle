@@ -24,7 +24,7 @@ class FeedBackScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  width: 300,
+                  width: (MediaQuery.of(context).size.width < 800) ? 260 : 300,
                   padding: const EdgeInsets.all(5),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
@@ -36,7 +36,9 @@ class FeedBackScreen extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: yellowColor,
-                        fontSize: 24,
+                        fontSize: (MediaQuery.of(context).size.width < 800)
+                            ? 16.5
+                            : 24,
                       ),
                     ),
                   ),
@@ -45,8 +47,8 @@ class FeedBackScreen extends StatelessWidget {
                   height: 20,
                 ),
                 Container(
-                  width: Get.width / 2,
-                  height: 500,
+                  width: Get.width / 1,
+                  height: (MediaQuery.of(context).size.width < 800) ? 380 : 500,
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
@@ -57,7 +59,8 @@ class FeedBackScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       SizedBox(
-                        height: 50,
+                        height:
+                            (MediaQuery.of(context).size.width < 800) ? 28 : 50,
                         width: double.infinity,
                         child: TextField(
                           controller: controller.nameC,
@@ -66,7 +69,10 @@ class FeedBackScreen extends StatelessWidget {
                             hintText: "Name",
                             hintStyle: TextStyle(
                               color: whiteColor.withOpacity(0.5),
-                              fontSize: 16,
+                              fontSize:
+                                  (MediaQuery.of(context).size.width < 800)
+                                      ? 12
+                                      : 18,
                             ),
                             fillColor: blueColor,
                             filled: true,
@@ -85,7 +91,8 @@ class FeedBackScreen extends StatelessWidget {
                         height: 20,
                       ),
                       SizedBox(
-                        height: 50,
+                        height:
+                            (MediaQuery.of(context).size.width < 800) ? 28 : 50,
                         width: double.infinity,
                         child: TextField(
                           controller: controller.emailC,
@@ -94,7 +101,10 @@ class FeedBackScreen extends StatelessWidget {
                             hintText: "Email",
                             hintStyle: TextStyle(
                               color: whiteColor.withOpacity(0.5),
-                              fontSize: 16,
+                              fontSize:
+                                  (MediaQuery.of(context).size.width < 800)
+                                      ? 12
+                                      : 18,
                             ),
                             fillColor: blueColor,
                             filled: true,
@@ -113,7 +123,9 @@ class FeedBackScreen extends StatelessWidget {
                         height: 20,
                       ),
                       SizedBox(
-                        height: 200,
+                        height: (MediaQuery.of(context).size.width < 800)
+                            ? 150
+                            : 200,
                         width: double.infinity,
                         child: TextField(
                           controller: controller.descC,
@@ -123,7 +135,10 @@ class FeedBackScreen extends StatelessWidget {
                             hintText: "Your FeedBack",
                             hintStyle: TextStyle(
                               color: whiteColor.withOpacity(0.5),
-                              fontSize: 16,
+                              fontSize:
+                                  (MediaQuery.of(context).size.width < 800)
+                                      ? 12
+                                      : 18,
                             ),
                             fillColor: blueColor,
                             filled: true,
