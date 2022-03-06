@@ -1,10 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_game/const.dart';
+import 'package:flutter_game/controllers/music_controller.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 class FeedBackController extends GetxController {
+  final musicController = Get.find<MusicController>();
+
   late TextEditingController nameC;
   late TextEditingController emailC;
   late TextEditingController descC;
@@ -17,6 +20,7 @@ class FeedBackController extends GetxController {
     nameC = TextEditingController();
     emailC = TextEditingController();
     descC = TextEditingController();
+    musicController.music.stop();
   }
 
   @override
@@ -25,6 +29,7 @@ class FeedBackController extends GetxController {
     nameC.dispose();
     emailC.dispose();
     descC.dispose();
+    musicController.dispose();
   }
 
   void sendFeedBack(String name, String email, String desc) async {

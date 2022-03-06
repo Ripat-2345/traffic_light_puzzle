@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_game/controllers/home_controller.dart';
+import 'package:flutter_game/controllers/music_controller.dart';
 import 'package:flutter_game/screens/widgets/car_color_widget.dart';
 import 'package:flutter_game/const.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,18 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final homeController = Get.put(HomeController());
+  final musicController = Get.put(MusicController());
+
+  @override
+  void initState() {
+    super.initState();
+    musicController.music.play();
+    html.window.onBeforeUnload.listen((event) {
+      musicController.music.stop();
+      musicController.music.play();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Title(
@@ -153,7 +166,7 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(
               height: 17,
             ),
-            Container(
+            SizedBox(
               width: 320,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -167,9 +180,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             size: 30,
                             color: darkColor,
                           ),
-                          Text(
-                            "Info",
-                          )
+                          const Text("Info"),
                         ],
                       )),
                   InkWell(
@@ -183,7 +194,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             size: 30,
                             color: darkColor,
                           ),
-                          Text("Demo"),
+                          const Text("Demo"),
                         ],
                       )),
                   InkWell(
@@ -195,20 +206,25 @@ class _HomeScreenState extends State<HomeScreen> {
                           size: 30,
                           color: darkColor,
                         ),
-                        Text("Rate")
+                        const Text("Rate")
                       ],
                     ),
                   ),
                   InkWell(
-                    onTap: () => Get.toNamed('/FeedBack'),
+                    onTap: () => musicController.musicPlay(),
                     child: Row(
                       children: [
-                        Icon(
-                          Icons.volume_up_rounded,
-                          size: 31,
-                          color: darkColor,
+                        Obx(
+                          () => (musicController.isPlay.value == false)
+                              ? Icon(
+                                  Icons.volume_off_rounded,
+                                  size: 31,
+                                  color: darkColor,
+                                )
+                              : Icon(Icons.volume_up_rounded,
+                                  size: 31, color: darkColor),
                         ),
-                        Text("Music")
+                        const Text("Music")
                       ],
                     ),
                   )
