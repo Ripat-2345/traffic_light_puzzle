@@ -18,10 +18,10 @@ jobs:
       - uses: actions/checkout@v2
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_TRAFFIC_LIGHT_PUZZLE }}'
+          # repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          # firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_TRAFFIC_LIGHT_PUZZLE }}'
           channelId: live
-          projectId: traffic-light-puzzle
+          # projectId: traffic-light-puzzle
 
       # Build Website
       - name: Build Website
