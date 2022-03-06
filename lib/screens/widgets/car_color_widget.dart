@@ -7,7 +7,7 @@ class CarColor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 5),
+      margin: const EdgeInsets.symmetric(horizontal: 10),
       width: 40,
       height: 40,
       decoration: BoxDecoration(
