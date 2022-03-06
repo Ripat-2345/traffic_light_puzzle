@@ -33,6 +33,10 @@ class GameController extends GetxController {
       (remainingTime == 0) ? onTimeEnded() : null;
       selectedLevel(_argument[0]);
     }
+
+    if (_argument[1] == "Level 1") {
+      // add dialog
+    }
   }
 
   @override

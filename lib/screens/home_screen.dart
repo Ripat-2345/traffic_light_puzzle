@@ -74,64 +74,6 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 InkWell(
-                  child: Container(
-                    height: 40,
-                    width: 120,
-                    padding: const EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                      color: darkColor,
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(7),
-                      ),
-                    ),
-                    child: Center(
-                      child: DropdownButton(
-                        iconEnabledColor: whiteColor,
-                        dropdownColor: darkColor,
-                        hint: Obx(
-                          () => Text(
-                            homeController.selectedLevel.value,
-                            style: TextStyle(
-                              color: whiteColor,
-                              fontSize:
-                                  (MediaQuery.of(context).size.width < 800)
-                                      ? 20
-                                      : 17,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                        underline: DropdownButtonHideUnderline(
-                          child: Container(),
-                        ),
-                        items: homeController.levels
-                            .map(
-                              (e) => DropdownMenuItem(
-                                value: e,
-                                child: Text(
-                                  e,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: whiteColor,
-                                    fontSize:
-                                        (MediaQuery.of(context).size.width <
-                                                800)
-                                            ? 20
-                                            : 17,
-                                  ),
-                                ),
-                              ),
-                            )
-                            .toList(),
-                        onChanged: (value) {
-                          homeController.selectedLevel.value = value.toString();
-                        },
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 50),
-                InkWell(
                   onTap: () => Get.toNamed(
                     "/Game",
                     arguments: [
