@@ -1,4 +1,3 @@
-import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_game/const.dart';
@@ -8,16 +7,11 @@ class HomeController extends GetxController {
   late final CarouselController carouselController;
   var selectedLevel = "Level 1".obs;
   var currentImg = 0.obs;
-  final music = AssetsAudioPlayer();
 
   @override
   void onInit() {
     super.onInit();
     carouselController = CarouselController();
-    music.open(
-      Audio.file("assets/musics/backsound1.mp3"),
-    );
-    music.play();
   }
 
   List<String> levels = [

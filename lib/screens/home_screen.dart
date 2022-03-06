@@ -1,6 +1,6 @@
-import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_game/controllers/home_controller.dart';
+import 'package:flutter_game/controllers/music_controller.dart';
 import 'package:flutter_game/screens/widgets/car_color_widget.dart';
 import 'package:flutter_game/const.dart';
 import 'package:get/get.dart';
@@ -16,10 +16,16 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final homeController = Get.put(HomeController());
+  final musicController = Get.put(MusicController());
 
   @override
   void initState() {
     super.initState();
+    musicController.music.play();
+    html.window.onBeforeUnload.listen((event) {
+      musicController.music.stop();
+      musicController.music.play();
+    });
   }
 
   @override
@@ -45,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Obx(
               () => Lottie.asset(
                 "assets/images/${homeController.fileCar}",
-                height: (MediaQuery.of(context).size.width < 800) ? 300 : 300,
+                height: (MediaQuery.of(context).size.width < 800) ? 200 : 300,
               ),
             ),
             Row(
@@ -62,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             const SizedBox(
-              height: 10,
+              height: 17,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -124,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(width: 30),
+                const SizedBox(width: 50),
                 InkWell(
                   onTap: () => Get.toNamed(
                     "/Game",
@@ -158,67 +164,76 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             const SizedBox(
-              height: 10,
+              height: 17,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                InkWell(
-                  onTap: () => homeController.dialogPlay(context),
-                  child: Text(
-                    "How To Play",
-                    style: TextStyle(
-                      color: darkColor,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      decoration: TextDecoration.underline,
+            SizedBox(
+              width: 320,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  InkWell(
+                      onTap: () => homeController.dialogPlay(context),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.info,
+                            size: 30,
+                            color: darkColor,
+                          ),
+                          const Text("Info"),
+                        ],
+                      )),
+                  InkWell(
+                      onTap: () => html.window.open(
+                          "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+                          "Demo Game"),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.play_circle_fill,
+                            size: 30,
+                            color: darkColor,
+                          ),
+                          const Text("Demo"),
+                        ],
+                      )),
+                  InkWell(
+                    onTap: () => Get.toNamed('/FeedBack'),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.rate_review_rounded,
+                          size: 30,
+                          color: darkColor,
+                        ),
+                        const Text("Rate")
+                      ],
                     ),
                   ),
-                ),
-                Text(
-                  " or ",
-                  style: TextStyle(
-                    color: darkColor,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                InkWell(
-                  onTap: () => html.window.open(
-                      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-                      "Demo Game"),
-                  child: Text(
-                    "Watch Demo Video",
-                    style: TextStyle(
-                      color: darkColor,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      decoration: TextDecoration.underline,
+                  InkWell(
+                    onTap: () => musicController.musicPlay(),
+                    child: Row(
+                      children: [
+                        Obx(
+                          () => (musicController.isPlay.value == false)
+                              ? Icon(
+                                  Icons.volume_off_rounded,
+                                  size: 31,
+                                  color: darkColor,
+                                )
+                              : Icon(Icons.volume_up_rounded,
+                                  size: 31, color: darkColor),
+                        ),
+                        const Text("Music")
+                      ],
                     ),
-                  ),
-                ),
-              ],
+                  )
+                ],
+              ),
             ),
             const SizedBox(
               height: 7,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                InkWell(
-                  onTap: () => Get.toNamed('/FeedBack'),
-                  child: Text(
-                    "Give Your Feedback!",
-                    style: TextStyle(
-                      color: darkColor,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      decoration: TextDecoration.underline,
-                    ),
-                  ),
-                ),
-              ],
-            )
           ],
         ),
       ),
