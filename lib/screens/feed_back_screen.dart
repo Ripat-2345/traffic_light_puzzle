@@ -33,6 +33,7 @@ class FeedBackScreen extends StatelessWidget {
                   child: Center(
                     child: Text(
                       "Give Your Feedback",
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                         color: yellowColor,
                         fontSize: 24,
@@ -140,27 +141,67 @@ class FeedBackScreen extends StatelessWidget {
                       const SizedBox(
                         height: 30,
                       ),
-                      SizedBox(
-                        width: 100,
-                        height: 40,
-                        child: ElevatedButton(
-                          onPressed: () => controller.sendFeedBack(
-                            controller.nameC.text,
-                            controller.emailC.text,
-                            controller.descC.text,
-                          ),
-                          style: TextButton.styleFrom(
-                            backgroundColor: yellowColor,
-                          ),
-                          child: Text(
-                            "Send",
-                            style: TextStyle(
-                              color: darkColor,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ),
-                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                              width: (MediaQuery.of(context).size.width < 800)
+                                  ? 65
+                                  : 100,
+                              height: (MediaQuery.of(context).size.width < 800)
+                                  ? 28
+                                  : 40,
+                              child: Container(
+                                child: ElevatedButton(
+                                  onPressed: () => Get.back(),
+                                  style: TextButton.styleFrom(
+                                    backgroundColor: blueColor,
+                                  ),
+                                  child: Text(
+                                    "Back",
+                                    style: TextStyle(
+                                      color: whiteColor,
+                                      fontSize:
+                                          (MediaQuery.of(context).size.width <
+                                                  800)
+                                              ? 10
+                                              : 16,
+                                    ),
+                                  ),
+                                ),
+                              )),
+                          SizedBox(
+                              width: (MediaQuery.of(context).size.width < 800)
+                                  ? 65
+                                  : 100,
+                              height: (MediaQuery.of(context).size.width < 800)
+                                  ? 28
+                                  : 40,
+                              child: Container(
+                                child: ElevatedButton(
+                                  onPressed: () => controller.sendFeedBack(
+                                    controller.nameC.text,
+                                    controller.emailC.text,
+                                    controller.descC.text,
+                                  ),
+                                  style: TextButton.styleFrom(
+                                    backgroundColor: yellowColor,
+                                  ),
+                                  child: Text(
+                                    "Send",
+                                    style: TextStyle(
+                                      color: darkColor,
+                                      fontSize:
+                                          (MediaQuery.of(context).size.width <
+                                                  800)
+                                              ? 10
+                                              : 16,
+                                    ),
+                                  ),
+                                ),
+                              )),
+                        ],
+                      )
                     ],
                   ),
                 ),

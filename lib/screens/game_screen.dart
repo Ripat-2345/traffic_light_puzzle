@@ -256,8 +256,16 @@ class _GameScreenState extends State<GameScreen> {
                                 Obx(() => (gameController.carMove.value)
                                     ? const SizedBox()
                                     : Container(
-                                        width: 40,
-                                        height: 100,
+                                        width:
+                                            (MediaQuery.of(context).size.width <
+                                                    800)
+                                                ? 20
+                                                : 40,
+                                        height:
+                                            (MediaQuery.of(context).size.width <
+                                                    800)
+                                                ? 60
+                                                : 100,
                                         decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(10),
@@ -270,8 +278,18 @@ class _GameScreenState extends State<GameScreen> {
                                               MainAxisAlignment.spaceEvenly,
                                           children: [
                                             Container(
-                                              width: 25,
-                                              height: 25,
+                                              width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width <
+                                                      800)
+                                                  ? 9
+                                                  : 25,
+                                              height: (MediaQuery.of(context)
+                                                          .size
+                                                          .width <
+                                                      800)
+                                                  ? 9
+                                                  : 25,
                                               decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(100),
@@ -279,8 +297,18 @@ class _GameScreenState extends State<GameScreen> {
                                               ),
                                             ),
                                             Container(
-                                              width: 25,
-                                              height: 25,
+                                              width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width <
+                                                      800)
+                                                  ? 9
+                                                  : 25,
+                                              height: (MediaQuery.of(context)
+                                                          .size
+                                                          .width <
+                                                      800)
+                                                  ? 9
+                                                  : 25,
                                               decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(100),
@@ -288,8 +316,18 @@ class _GameScreenState extends State<GameScreen> {
                                               ),
                                             ),
                                             Container(
-                                              width: 25,
-                                              height: 25,
+                                              width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width <
+                                                      800)
+                                                  ? 9
+                                                  : 25,
+                                              height: (MediaQuery.of(context)
+                                                          .size
+                                                          .width <
+                                                      800)
+                                                  ? 9
+                                                  : 25,
                                               decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(100),
