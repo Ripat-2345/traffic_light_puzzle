@@ -157,17 +157,8 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 InkWell(
-                  onTap: () => homeController.dialogPlay(context),
-                  child: Text(
-                    "How To Play",
-                    style: TextStyle(
-                      color: darkColor,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      decoration: TextDecoration.underline,
-                    ),
-                  ),
-                ),
+                    onTap: () => homeController.dialogPlay(context),
+                    child: Icon(Icons.info)),
                 Text(
                   " or ",
                   style: TextStyle(
