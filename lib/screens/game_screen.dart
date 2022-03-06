@@ -135,16 +135,24 @@ class _GameScreenState extends State<GameScreen> {
                                           : null;
                                     },
                                     child: Container(
-                                      width:
-                                          (MediaQuery.of(context).size.width <
-                                                  800)
-                                              ? 70
-                                              : 100,
-                                      height:
-                                          (MediaQuery.of(context).size.width <
-                                                  800)
-                                              ? 35
-                                              : 40,
+                                      width: (MediaQuery.of(context)
+                                                  .size
+                                                  .width <
+                                              800)
+                                          ? (MediaQuery.of(context).size.width <
+                                                  400)
+                                              ? 40
+                                              : 70
+                                          : 100,
+                                      height: (MediaQuery.of(context)
+                                                  .size
+                                                  .width <
+                                              800)
+                                          ? (MediaQuery.of(context).size.width <
+                                                  400)
+                                              ? 20
+                                              : 35
+                                          : 40,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
                                         color: darkColor,
@@ -159,13 +167,23 @@ class _GameScreenState extends State<GameScreen> {
                                                           .size
                                                           .width <
                                                       800)
-                                                  ? 15
+                                                  ? (MediaQuery.of(context)
+                                                              .size
+                                                              .width <
+                                                          400)
+                                                      ? 10
+                                                      : 15
                                                   : 25,
                                               height: (MediaQuery.of(context)
                                                           .size
                                                           .width <
                                                       800)
-                                                  ? 15
+                                                  ? (MediaQuery.of(context)
+                                                              .size
+                                                              .width <
+                                                          400)
+                                                      ? 10
+                                                      : 15
                                                   : 25,
                                               decoration: BoxDecoration(
                                                 color: (gameController
@@ -184,13 +202,23 @@ class _GameScreenState extends State<GameScreen> {
                                                           .size
                                                           .width <
                                                       800)
-                                                  ? 15
+                                                  ? (MediaQuery.of(context)
+                                                              .size
+                                                              .width <
+                                                          400)
+                                                      ? 10
+                                                      : 15
                                                   : 25,
                                               height: (MediaQuery.of(context)
                                                           .size
                                                           .width <
                                                       800)
-                                                  ? 15
+                                                  ? (MediaQuery.of(context)
+                                                              .size
+                                                              .width <
+                                                          400)
+                                                      ? 10
+                                                      : 15
                                                   : 25,
                                               decoration: BoxDecoration(
                                                 color: (gameController
@@ -209,13 +237,23 @@ class _GameScreenState extends State<GameScreen> {
                                                           .size
                                                           .width <
                                                       800)
-                                                  ? 15
+                                                  ? (MediaQuery.of(context)
+                                                              .size
+                                                              .width <
+                                                          400)
+                                                      ? 10
+                                                      : 15
                                                   : 25,
                                               height: (MediaQuery.of(context)
                                                           .size
                                                           .width <
                                                       800)
-                                                  ? 15
+                                                  ? (MediaQuery.of(context)
+                                                              .size
+                                                              .width <
+                                                          400)
+                                                      ? 10
+                                                      : 15
                                                   : 25,
                                               decoration: BoxDecoration(
                                                 color: (gameController
