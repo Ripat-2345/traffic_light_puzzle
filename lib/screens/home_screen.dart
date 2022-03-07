@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_game/controllers/game_controller.dart';
 import 'package:flutter_game/controllers/home_controller.dart';
 import 'package:flutter_game/screens/widgets/car_color_widget.dart';
 import 'package:flutter_game/const.dart';
@@ -66,10 +67,11 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 InkWell(
                   onTap: () => Get.toNamed(
-                    "/Game",
+                    "/Home",
                     arguments: [
                       homeController.selectedLevel.value,
-                      homeController.fileCar
+                      homeController.fileCar,
+                      GameController().guideDialog(context)
                     ],
                   ),
                   child: Container(

@@ -6,8 +6,10 @@ import 'package:flutter_countdown_timer/countdown_timer_controller.dart';
 import 'package:flutter_game/const.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:flutter_game/controllers/home_controller.dart';
 
 class GameController extends GetxController {
+  final homeController = Get.put(HomeController());
   final _argument = Get.arguments;
   late CountdownTimerController timeController = CountdownTimerController(
     endTime: remainingTime,
@@ -204,5 +206,89 @@ class GameController extends GetxController {
         );
       });
     }
+  }
+
+  void guideDialog(BuildContext context) {
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext builderContext) {
+        return AlertDialog(
+          title: Text(
+            "Objective",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 20,
+            ),
+          ),
+          content: Container(
+            width: 1000,
+            height: 1100,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: ExactAssetImage('assets/images/howtoplay5.png'),
+                    fit: BoxFit.fill)),
+          ),
+          actions: [
+            Center(
+              child: SizedBox(
+                width: 1000,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    InkWell(
+                      onTap: () => Get.back(),
+                      child: Container(
+                          width: 100,
+                          height: 40,
+                          padding: const EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                            color: whiteColor,
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(7),
+                            ),
+                          ),
+                          child: Center(
+                            child: Icon(
+                              Icons.arrow_back_ios_new_rounded,
+                              color: darkColor,
+                              size: 25,
+                            ),
+                          )),
+                    ),
+                    InkWell(
+                      onTap: () => Get.toNamed(
+                        "/Game",
+                        arguments: [
+                          homeController.selectedLevel.value,
+                          homeController.fileCar
+                        ],
+                      ),
+                      child: Container(
+                          width: 100,
+                          height: 40,
+                          padding: const EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                            color: whiteColor,
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(7),
+                            ),
+                          ),
+                          child: Center(
+                            child: Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              color: darkColor,
+                              size: 25,
+                            ),
+                          )),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        );
+      },
+    );
   }
 }
