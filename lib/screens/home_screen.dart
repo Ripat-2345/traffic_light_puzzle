@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_game/controllers/home_controller.dart';
-import 'package:flutter_game/controllers/music_controller.dart';
 import 'package:flutter_game/screens/widgets/car_color_widget.dart';
 import 'package:flutter_game/const.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'dart:html' as html;
+
+import '../controllers/music_controller.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -16,17 +17,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final homeController = Get.put(HomeController());
-  final musicController = Get.put(MusicController());
-
-  @override
-  void initState() {
-    super.initState();
-    musicController.music.play();
-    html.window.onBeforeUnload.listen((event) {
-      musicController.music.stop();
-      musicController.music.play();
-    });
-  }
+  final musicController = Get.find<MusicController>();
 
   @override
   Widget build(BuildContext context) {
@@ -157,14 +148,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Row(
                       children: [
                         Obx(
-                          () => (musicController.isPlay.value == false)
+                          () => (musicController.isPlay.value)
                               ? Icon(
                                   Icons.volume_off_rounded,
                                   size: 31,
                                   color: darkColor,
                                 )
-                              : Icon(Icons.volume_up_rounded,
-                                  size: 31, color: darkColor),
+                              : Icon(
+                                  Icons.volume_up_rounded,
+                                  size: 31,
+                                  color: darkColor,
+                                ),
                         ),
                         const Text("Music")
                       ],

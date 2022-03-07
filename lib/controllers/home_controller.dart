@@ -2,6 +2,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_game/const.dart';
 import 'package:get/get.dart';
+import 'music_controller.dart';
+import 'dart:html' as html;
 
 class HomeController extends GetxController {
   late final CarouselController carouselController;

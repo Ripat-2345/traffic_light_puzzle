@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_game/controllers/music_controller.dart';
 import 'package:flutter_game/screens/feed_back_screen.dart';
 import 'package:flutter_game/screens/game_screen.dart';
 import 'package:get/get.dart';
@@ -16,11 +17,13 @@ void main() async {
       projectId: "traffic-light-puzzle",
     ),
   );
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
+  final musicController = Get.put(MusicController());
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(

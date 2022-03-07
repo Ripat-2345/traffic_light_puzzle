@@ -3,15 +3,24 @@ import 'package:get/get.dart';
 import 'dart:html' as html;
 
 class MusicController extends GetxController {
-  final music = AssetsAudioPlayer();
-  var isPlay = true.obs;
+  final AssetsAudioPlayer music = AssetsAudioPlayer();
+  var isPlay = false.obs;
 
   @override
   void onInit() {
     super.onInit();
     music.open(
       Audio.file("assets/musics/backsound1.mp3"),
+      loopMode: LoopMode.single,
+      playInBackground: PlayInBackground.enabled,
     );
+
+    playMusic();
+
+    html.window.onBeforeUnload.listen((event) {
+      stopMusic();
+      playMusic();
+    });
   }
 
   @override
@@ -23,10 +32,18 @@ class MusicController extends GetxController {
   void musicPlay() {
     isPlay.toggle();
 
-    if (isPlay.value == false) {
-      music.pause();
+    if (isPlay.value) {
+      stopMusic();
     } else {
-      music.play();
+      playMusic();
     }
+  }
+
+  playMusic() {
+    music.play();
+  }
+
+  stopMusic() async {
+    await music.stop();
   }
 }
