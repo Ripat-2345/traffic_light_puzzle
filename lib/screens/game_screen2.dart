@@ -63,7 +63,7 @@ class _GameScreenState extends State<GameScreen> {
                                   width: 5,
                                 ),
                                 CountdownTimer(
-                                  endTime: gameController.remainingTime,
+                                  endTime: gameController.remainingTime.value,
                                   controller: gameController.timeController,
                                   widgetBuilder: (_, time) {
                                     if (time == null) {

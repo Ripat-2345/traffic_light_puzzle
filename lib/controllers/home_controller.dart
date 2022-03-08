@@ -2,7 +2,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_game/const.dart';
 import 'package:get/get.dart';
-import 'music_controller.dart';
 import 'dart:html' as html;
 
 class HomeController extends GetxController {
@@ -15,14 +14,6 @@ class HomeController extends GetxController {
     super.onInit();
     carouselController = CarouselController();
   }
-
-  List<String> levels = [
-    "Level 1",
-    "Level 2",
-    "Level 3",
-    "Level 4",
-    "Level 5",
-  ];
 
   List colors = const [
     Color(0XFF1A1A1A),

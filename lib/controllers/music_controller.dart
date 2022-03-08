@@ -1,6 +1,5 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:get/get.dart';
-import 'dart:html' as html;
 
 class MusicController extends GetxController {
   final AssetsAudioPlayer music = AssetsAudioPlayer();
@@ -16,11 +15,6 @@ class MusicController extends GetxController {
     );
 
     playMusic();
-
-    html.window.onBeforeUnload.listen((event) {
-      stopMusic();
-      playMusic();
-    });
   }
 
   @override
@@ -43,7 +37,7 @@ class MusicController extends GetxController {
     music.play();
   }
 
-  stopMusic() async {
-    await music.stop();
+  stopMusic() {
+    music.stop();
   }
 }

@@ -12,10 +12,11 @@ class GameController extends GetxController {
   final homeController = Get.put(HomeController());
   final _argument = Get.arguments;
   late CountdownTimerController timeController = CountdownTimerController(
-    endTime: remainingTime,
+    endTime: remainingTime.value,
     onEnd: onTimeEnded,
   );
-  late int remainingTime = DateTime.now().millisecondsSinceEpoch + 1000 * 90;
+  late RxInt remainingTime =
+      (DateTime.now().millisecondsSinceEpoch + 1000 * 90).obs;
   late Timer finish;
   var trafficLamp = 0.obs;
   var carMove = false.obs;
@@ -32,12 +33,14 @@ class GameController extends GetxController {
         Get.offAllNamed("/Home");
       });
     } else {
-      (remainingTime == 0) ? onTimeEnded() : null;
       selectedLevel(_argument[0]);
-    }
-
-    if (_argument[1] == "Level 1") {
-      // add dialog
+      (remainingTime.value == 0) ? onTimeEnded() : null;
+      if (_argument[0] == "Level 1") {
+        WidgetsBinding.instance!.addPostFrameCallback((_) {
+          timeController.disposeTimer();
+          return guideDialog();
+        });
+      }
     }
   }
 
@@ -92,15 +95,15 @@ class GameController extends GetxController {
   void selectedLevel(String level) {
     getLamp(
       (level == "Level 1")
-          ? trafficLamp.value = 19
+          ? trafficLamp.value = 21
           : (level == "Level 2")
-              ? trafficLamp.value = 23
+              ? trafficLamp.value = 25
               : (level == "Level 3")
-                  ? trafficLamp.value = 29
+                  ? trafficLamp.value = 31
                   : (level == "Level 4")
-                      ? trafficLamp.value = 33
+                      ? trafficLamp.value = 35
                       : (level == "Level 5")
-                          ? trafficLamp.value = 39
+                          ? trafficLamp.value = 40
                           : trafficLamp.value = 0,
     );
   }
@@ -145,32 +148,35 @@ class GameController extends GetxController {
       timeController.disposeTimer();
       absorbing.toggle();
       carMove.toggle();
-      Future.delayed(const Duration(seconds: 2), () {
-        Get.defaultDialog(
-          barrierDismissible: false,
-          backgroundColor: whiteColor,
-          title: "${_argument[0]} Finish",
-          titleStyle: TextStyle(color: darkColor, fontSize: 20),
-          content: Lottie.asset(
-            "assets/images/success.json",
-            width: 300,
-            fit: BoxFit.cover,
-          ),
-          contentPadding: const EdgeInsets.all(10),
-          textConfirm: "Send Your Feedback",
-          confirmTextColor: darkColor,
-          onConfirm: () {
-            Get.offAllNamed(
-              "/FeedBack",
-            );
-            timeController.dispose();
-          },
-          textCancel: "Back To Home",
-          cancelTextColor: darkColor,
-          onCancel: () => Get.offAllNamed('/Home'),
-          buttonColor: yellowColor,
-        );
-      });
+      Future.delayed(
+        const Duration(seconds: 2),
+        () {
+          Get.defaultDialog(
+            barrierDismissible: false,
+            backgroundColor: whiteColor,
+            title: "${_argument[0]} Finish",
+            titleStyle: TextStyle(color: darkColor, fontSize: 20),
+            content: Lottie.asset(
+              "assets/images/success.json",
+              width: 300,
+              fit: BoxFit.cover,
+            ),
+            contentPadding: const EdgeInsets.all(10),
+            textConfirm: "Send Your Feedback",
+            confirmTextColor: darkColor,
+            onConfirm: () {
+              Get.offAllNamed(
+                "/FeedBack",
+              );
+              timeController.dispose();
+            },
+            textCancel: "Back To Home",
+            cancelTextColor: darkColor,
+            onCancel: () => Get.offAllNamed('/Home'),
+            buttonColor: yellowColor,
+          );
+        },
+      );
     } else {
       timeController.disposeTimer();
       absorbing.toggle();
@@ -208,87 +214,32 @@ class GameController extends GetxController {
     }
   }
 
-  void guideDialog(BuildContext context) {
-    showDialog(
+  void guideDialog() {
+    Get.defaultDialog(
       barrierDismissible: false,
-      context: context,
-      builder: (BuildContext builderContext) {
-        return AlertDialog(
-          title: Text(
-            "Objective",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 20,
-            ),
-          ),
-          content: Container(
-            width: 1000,
-            height: 1100,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: ExactAssetImage('assets/images/howtoplay5.png'),
-                    fit: BoxFit.fill)),
-          ),
-          actions: [
-            Center(
-              child: SizedBox(
-                width: 1000,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    InkWell(
-                      onTap: () => Get.back(),
-                      child: Container(
-                          width: 100,
-                          height: 40,
-                          padding: const EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                            color: whiteColor,
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(7),
-                            ),
-                          ),
-                          child: Center(
-                            child: Icon(
-                              Icons.arrow_back_ios_new_rounded,
-                              color: darkColor,
-                              size: 25,
-                            ),
-                          )),
-                    ),
-                    InkWell(
-                      onTap: () => Get.toNamed(
-                        "/Game",
-                        arguments: [
-                          homeController.selectedLevel.value,
-                          homeController.fileCar
-                        ],
-                      ),
-                      child: Container(
-                          width: 100,
-                          height: 40,
-                          padding: const EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                            color: whiteColor,
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(7),
-                            ),
-                          ),
-                          child: Center(
-                            child: Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              color: darkColor,
-                              size: 25,
-                            ),
-                          )),
-                    ),
-                  ],
-                ),
-              ),
-            )
-          ],
-        );
+      backgroundColor: whiteColor,
+      title: "Objective",
+      titleStyle: TextStyle(
+        fontSize: 20,
+        color: darkColor,
+      ),
+      contentPadding: const EdgeInsets.all(2),
+      content: ClipRRect(
+        borderRadius: BorderRadius.circular(5),
+        child: Image(
+          image: const AssetImage("assets/images/howtoplay5.png"),
+          width: (Get.width < 800) ? Get.width / 1.5 : Get.width / 2,
+          height: (Get.width < 800) ? Get.height / 4 : Get.height / 2,
+          fit: BoxFit.fill,
+        ),
+      ),
+      textConfirm: "OK",
+      confirmTextColor: darkColor,
+      onConfirm: () {
+        timeController.start();
+        Get.back();
       },
+      buttonColor: yellowColor,
     );
   }
 }

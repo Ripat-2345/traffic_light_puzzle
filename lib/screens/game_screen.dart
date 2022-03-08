@@ -13,8 +13,16 @@ class GameScreen extends StatefulWidget {
   State<GameScreen> createState() => _GameScreenState();
 }
 
-class _GameScreenState extends State<GameScreen> {
+class _GameScreenState extends State<GameScreen>
+    with SingleTickerProviderStateMixin {
   final gameController = Get.put(GameController());
+  late final AnimationController animationController;
+
+  @override
+  void initState() {
+    super.initState();
+    animationController = AnimationController(vsync: this);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +71,7 @@ class _GameScreenState extends State<GameScreen> {
                                   width: 5,
                                 ),
                                 CountdownTimer(
-                                  endTime: gameController.remainingTime,
+                                  endTime: gameController.remainingTime.value,
                                   controller: gameController.timeController,
                                   widgetBuilder: (_, time) {
                                     if (time == null) {
@@ -96,10 +104,10 @@ class _GameScreenState extends State<GameScreen> {
                         margin: EdgeInsets.only(
                           left: (MediaQuery.of(context).size.width < 800)
                               ? 10
-                              : 50,
+                              : 150,
                           right: (MediaQuery.of(context).size.width < 800)
                               ? 10
-                              : 50,
+                              : 150,
                         ),
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
@@ -141,7 +149,7 @@ class _GameScreenState extends State<GameScreen> {
                                               800)
                                           ? (MediaQuery.of(context).size.width <
                                                   400)
-                                              ? 40
+                                              ? 60
                                               : 70
                                           : 100,
                                       height: (MediaQuery.of(context)
@@ -150,7 +158,7 @@ class _GameScreenState extends State<GameScreen> {
                                               800)
                                           ? (MediaQuery.of(context).size.width <
                                                   400)
-                                              ? 20
+                                              ? 30
                                               : 35
                                           : 40,
                                       decoration: BoxDecoration(
@@ -171,8 +179,8 @@ class _GameScreenState extends State<GameScreen> {
                                                               .size
                                                               .width <
                                                           400)
-                                                      ? 10
-                                                      : 15
+                                                      ? 15
+                                                      : 20
                                                   : 25,
                                               height: (MediaQuery.of(context)
                                                           .size
@@ -182,8 +190,8 @@ class _GameScreenState extends State<GameScreen> {
                                                               .size
                                                               .width <
                                                           400)
-                                                      ? 10
-                                                      : 15
+                                                      ? 15
+                                                      : 20
                                                   : 25,
                                               decoration: BoxDecoration(
                                                 color: (gameController
@@ -206,8 +214,8 @@ class _GameScreenState extends State<GameScreen> {
                                                               .size
                                                               .width <
                                                           400)
-                                                      ? 10
-                                                      : 15
+                                                      ? 15
+                                                      : 20
                                                   : 25,
                                               height: (MediaQuery.of(context)
                                                           .size
@@ -217,8 +225,8 @@ class _GameScreenState extends State<GameScreen> {
                                                               .size
                                                               .width <
                                                           400)
-                                                      ? 10
-                                                      : 15
+                                                      ? 15
+                                                      : 20
                                                   : 25,
                                               decoration: BoxDecoration(
                                                 color: (gameController
@@ -241,8 +249,8 @@ class _GameScreenState extends State<GameScreen> {
                                                               .size
                                                               .width <
                                                           400)
-                                                      ? 10
-                                                      : 15
+                                                      ? 15
+                                                      : 20
                                                   : 25,
                                               height: (MediaQuery.of(context)
                                                           .size
@@ -252,8 +260,8 @@ class _GameScreenState extends State<GameScreen> {
                                                               .size
                                                               .width <
                                                           400)
-                                                      ? 10
-                                                      : 15
+                                                      ? 15
+                                                      : 20
                                                   : 25,
                                               decoration: BoxDecoration(
                                                 color: (gameController
@@ -291,107 +299,139 @@ class _GameScreenState extends State<GameScreen> {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Obx(() => (gameController.carMove.value)
-                                    ? const SizedBox()
-                                    : Container(
-                                        width:
-                                            (MediaQuery.of(context).size.width <
-                                                    800)
-                                                ? 20
-                                                : 40,
-                                        height:
-                                            (MediaQuery.of(context).size.width <
-                                                    800)
-                                                ? 60
-                                                : 100,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          color: darkColor,
-                                          border:
-                                              Border.all(color: Colors.grey),
-                                        ),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Container(
-                                              width: (MediaQuery.of(context)
-                                                          .size
-                                                          .width <
-                                                      800)
-                                                  ? 9
-                                                  : 25,
-                                              height: (MediaQuery.of(context)
-                                                          .size
-                                                          .width <
-                                                      800)
-                                                  ? 9
-                                                  : 25,
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(100),
-                                                color: Colors.green,
-                                              ),
-                                            ),
-                                            Container(
-                                              width: (MediaQuery.of(context)
-                                                          .size
-                                                          .width <
-                                                      800)
-                                                  ? 9
-                                                  : 25,
-                                              height: (MediaQuery.of(context)
-                                                          .size
-                                                          .width <
-                                                      800)
-                                                  ? 9
-                                                  : 25,
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(100),
-                                                color: yellowColor,
-                                              ),
-                                            ),
-                                            Container(
-                                              width: (MediaQuery.of(context)
-                                                          .size
-                                                          .width <
-                                                      800)
-                                                  ? 9
-                                                  : 25,
-                                              height: (MediaQuery.of(context)
-                                                          .size
-                                                          .width <
-                                                      800)
-                                                  ? 9
-                                                  : 25,
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(100),
-                                                color: Colors.red,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      )),
+                                // Obx(
+                                //   () => (gameController.carMove.value)
+                                //       ? const SizedBox()
+                                //       : Container(
+                                //           width: (MediaQuery.of(context)
+                                //                       .size
+                                //                       .width <
+                                //                   800)
+                                //               ? 20
+                                //               : 40,
+                                //           height: (MediaQuery.of(context)
+                                //                       .size
+                                //                       .width <
+                                //                   800)
+                                //               ? 60
+                                //               : 100,
+                                //           decoration: BoxDecoration(
+                                //             borderRadius:
+                                //                 BorderRadius.circular(10),
+                                //             color: darkColor,
+                                //             border:
+                                //                 Border.all(color: Colors.grey),
+                                //           ),
+                                //           child: Column(
+                                //             mainAxisAlignment:
+                                //                 MainAxisAlignment.spaceEvenly,
+                                //             children: [
+                                //               Container(
+                                //                 width: (MediaQuery.of(context)
+                                //                             .size
+                                //                             .width <
+                                //                         800)
+                                //                     ? 9
+                                //                     : 25,
+                                //                 height: (MediaQuery.of(context)
+                                //                             .size
+                                //                             .width <
+                                //                         800)
+                                //                     ? 9
+                                //                     : 25,
+                                //                 decoration: BoxDecoration(
+                                //                   borderRadius:
+                                //                       BorderRadius.circular(
+                                //                           100),
+                                //                   color: Colors.green,
+                                //                 ),
+                                //               ),
+                                //               Container(
+                                //                 width: (MediaQuery.of(context)
+                                //                             .size
+                                //                             .width <
+                                //                         800)
+                                //                     ? 9
+                                //                     : 25,
+                                //                 height: (MediaQuery.of(context)
+                                //                             .size
+                                //                             .width <
+                                //                         800)
+                                //                     ? 9
+                                //                     : 25,
+                                //                 decoration: BoxDecoration(
+                                //                   borderRadius:
+                                //                       BorderRadius.circular(
+                                //                           100),
+                                //                   color: yellowColor,
+                                //                 ),
+                                //               ),
+                                //               Container(
+                                //                 width: (MediaQuery.of(context)
+                                //                             .size
+                                //                             .width <
+                                //                         800)
+                                //                     ? 9
+                                //                     : 25,
+                                //                 height: (MediaQuery.of(context)
+                                //                             .size
+                                //                             .width <
+                                //                         800)
+                                //                     ? 9
+                                //                     : 25,
+                                //                 decoration: BoxDecoration(
+                                //                   borderRadius:
+                                //                       BorderRadius.circular(
+                                //                           100),
+                                //                   color: Colors.red,
+                                //                 ),
+                                //               ),
+                                //             ],
+                                //           ),
+                                //         ),
+                                // ),
+
                                 SizedBox(
                                   width:
                                       (MediaQuery.of(context).size.width < 800)
-                                          ? 200
+                                          ? (MediaQuery.of(context).size.width <
+                                                  400)
+                                              ? 150
+                                              : 200
                                           : 300,
                                   height:
                                       (MediaQuery.of(context).size.width < 800)
-                                          ? 120
+                                          ? (MediaQuery.of(context).size.width <
+                                                  400)
+                                              ? 90
+                                              : 120
                                           : 180,
                                   child: (gameController.argument == null)
-                                      ? Lottie.asset(
-                                          "assets/images/car.json",
-                                          fit: BoxFit.cover,
+                                      ? Obx(
+                                          () => Lottie.asset(
+                                            "assets/images/car.json",
+                                            fit: BoxFit.cover,
+                                            controller: animationController,
+                                            onLoaded: (composition) {
+                                              if (gameController
+                                                  .carMove.value) {
+                                                animationController.forward();
+                                              }
+                                            },
+                                          ),
                                         )
-                                      : Lottie.asset(
-                                          "assets/images/${gameController.argument[1]}",
-                                          fit: BoxFit.cover,
+                                      : Obx(
+                                          () => Lottie.asset(
+                                            "assets/images/${gameController.argument[1]}",
+                                            fit: BoxFit.cover,
+                                            controller: animationController,
+                                            onLoaded: (composition) {
+                                              if (gameController
+                                                  .carMove.value) {
+                                                animationController.forward();
+                                              }
+                                            },
+                                          ),
                                         ),
                                 ),
                               ],
@@ -399,9 +439,13 @@ class _GameScreenState extends State<GameScreen> {
                           )),
                       Container(
                         margin: const EdgeInsets.only(
-                            left: 20, bottom: 20, right: 20),
+                          left: 20,
+                          bottom: 20,
+                          right: 20,
+                        ),
                         width: double.infinity,
-                        height: 40,
+                        height:
+                            (MediaQuery.of(context).size.width < 800) ? 20 : 40,
                         decoration: BoxDecoration(
                           color: yellowColor,
                           borderRadius: BorderRadius.circular(100),
