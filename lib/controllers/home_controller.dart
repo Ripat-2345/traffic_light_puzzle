@@ -59,96 +59,107 @@ class HomeController extends GetxController {
       barrierDismissible: false,
       context: context,
       builder: (context) {
-        return AlertDialog(
-          backgroundColor: whiteColor,
-          title: Center(
-            child: Text(
-              "How To Play?",
-              style: TextStyle(
-                color: darkColor,
-                fontSize: 20,
-              ),
-            ),
-          ),
-          contentPadding: const EdgeInsets.symmetric(vertical: 3.5),
-          actions: [
-            Center(
-              child: ElevatedButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: yellowColor,
-                ),
-                onPressed: () {
-                  currentImg.value = 0;
-                  Get.back();
-                },
-                child: Text(
-                  "I Got It!",
-                  style: TextStyle(color: darkColor),
+        return Padding(
+          padding: (Get.width < 800)
+              ? const EdgeInsets.symmetric(vertical: 140)
+              : const EdgeInsets.all(0),
+          child: AlertDialog(
+            backgroundColor: whiteColor,
+            title: Center(
+              child: Text(
+                "How To Play?",
+                style: TextStyle(
+                  color: darkColor,
+                  fontSize: 20,
                 ),
               ),
             ),
-          ],
-          content: Column(
-            children: [
-              Expanded(
-                child: CarouselSlider(
-                  carouselController: carouselController,
-                  options: CarouselOptions(
-                    autoPlay: true,
-                    autoPlayAnimationDuration:
-                        const Duration(milliseconds: 2750),
-                    enlargeCenterPage: true,
-                    aspectRatio: 2.2,
-                    onPageChanged: (index, reason) {
-                      currentImg.value = index;
-                    },
+            contentPadding: const EdgeInsets.all(2),
+            actions: [
+              Center(
+                child: ElevatedButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: yellowColor,
                   ),
-                  items: imgList
-                      .map(
-                        (item) => Container(
-                          margin: const EdgeInsets.all(5.0),
-                          child: ClipRRect(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(10.0),
-                            ),
-                            child: Image.network(
-                              item,
-                              // fit: BoxFit.contain,
-                              width: 1000.0,
-                            ),
-                          ),
-                        ),
-                      )
-                      .toList(),
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: imgList.asMap().entries.map(
-                  (entry) {
-                    return GestureDetector(
-                      onTap: () => carouselController.animateToPage(entry.key),
-                      child: Obx(
-                        () => Container(
-                          width: 12.0,
-                          height: 12.0,
-                          margin: const EdgeInsets.symmetric(
-                            vertical: 8.0,
-                            horizontal: 4.0,
-                          ),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: (currentImg.value == entry.key)
-                                ? Colors.black
-                                : Colors.black26,
-                          ),
-                        ),
-                      ),
-                    );
+                  onPressed: () {
+                    currentImg.value = 0;
+                    Get.back();
                   },
-                ).toList(),
+                  child: Text(
+                    "I Got It!",
+                    style: TextStyle(color: darkColor),
+                  ),
+                ),
               ),
             ],
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Expanded(
+                  child: CarouselSlider(
+                    carouselController: carouselController,
+                    options: CarouselOptions(
+                      autoPlay: true,
+                      autoPlayAnimationDuration:
+                          const Duration(milliseconds: 2750),
+                      enlargeCenterPage: true,
+                      onPageChanged: (index, reason) {
+                        currentImg.value = index;
+                      },
+                    ),
+                    items: imgList
+                        .map(
+                          (item) => Container(
+                            margin: const EdgeInsets.all(5.0),
+                            child: ClipRRect(
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(10.0),
+                              ),
+                              child: Image(
+                                image: AssetImage(item),
+                                width: (Get.width < 800)
+                                    ? Get.height / 1.5
+                                    : Get.width / 2,
+                                height: (Get.width < 800)
+                                    ? Get.height / 4
+                                    : Get.height / 2,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: imgList.asMap().entries.map(
+                    (entry) {
+                      return GestureDetector(
+                        onTap: () =>
+                            carouselController.animateToPage(entry.key),
+                        child: Obx(
+                          () => Container(
+                            width: 12.0,
+                            height: 12.0,
+                            margin: const EdgeInsets.symmetric(
+                              vertical: 8.0,
+                              horizontal: 4.0,
+                            ),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: (currentImg.value == entry.key)
+                                  ? Colors.black
+                                  : Colors.black26,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ).toList(),
+                ),
+              ],
+            ),
           ),
         );
       },

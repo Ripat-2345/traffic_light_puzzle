@@ -105,31 +105,33 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   InkWell(
-                      onTap: () => homeController.dialogPlay(context),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.info,
-                            size: 30,
-                            color: darkColor,
-                          ),
-                          const Text("Info"),
-                        ],
-                      )),
+                    onTap: () => homeController.dialogPlay(context),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.info,
+                          size: 30,
+                          color: darkColor,
+                        ),
+                        const Text("Info"),
+                      ],
+                    ),
+                  ),
                   InkWell(
-                      onTap: () => html.window.open(
-                          "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-                          "Demo Game"),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.play_circle_fill,
-                            size: 30,
-                            color: darkColor,
-                          ),
-                          const Text("Demo"),
-                        ],
-                      )),
+                    onTap: () => html.window.open(
+                        "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+                        "Demo Game"),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.play_circle_fill,
+                          size: 30,
+                          color: darkColor,
+                        ),
+                        const Text("Demo"),
+                      ],
+                    ),
+                  ),
                   InkWell(
                     onTap: () => Get.toNamed('/FeedBack'),
                     child: Row(
