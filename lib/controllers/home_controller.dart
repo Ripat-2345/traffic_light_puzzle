@@ -1,11 +1,15 @@
+import 'dart:js';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_game/const.dart';
+import 'package:flutter_game/controllers/music_controller.dart';
 import 'package:get/get.dart';
 import 'dart:html' as html;
 
 class HomeController extends GetxController {
   late final CarouselController carouselController;
+  final musicController = Get.find<MusicController>();
   var selectedLevel = "Level 1".obs;
   var currentImg = 0.obs;
 
@@ -161,6 +165,84 @@ class HomeController extends GetxController {
               ],
             ),
           ),
+        );
+      },
+    );
+  }
+
+  void guideDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      barrierColor: darkColor.withOpacity(0.8),
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: whiteColor,
+          title: Center(
+            child: Text(
+              "Objective",
+              style: TextStyle(fontSize: 22, color: darkColor),
+            ),
+          ),
+          contentPadding: const EdgeInsets.all(10),
+          content: ClipRRect(
+            borderRadius: BorderRadius.circular(5),
+            child: Image(
+              image: const AssetImage("assets/images/howtoplay5.png"),
+              width: (Get.width < 800) ? Get.width / 1.5 : Get.width / 1.5,
+              height: (Get.width < 800) ? Get.height / 4 : Get.height / 1.5,
+              fit: BoxFit.fill,
+            ),
+          ),
+          actions: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: whiteColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(100),
+                      side: BorderSide(color: darkColor, width: 2),
+                    ),
+                  ),
+                  onPressed: () {
+                    Get.back();
+                    musicController.stopMusic();
+                  },
+                  child: Text(
+                    "Back",
+                    style: TextStyle(color: darkColor),
+                  ),
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
+                ElevatedButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: yellowColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(100),
+                      side: BorderSide(color: darkColor, width: 2),
+                    ),
+                  ),
+                  onPressed: () {
+                    Get.toNamed(
+                      "/Game",
+                      arguments: [
+                        selectedLevel.value,
+                        fileCar,
+                      ],
+                    );
+                  },
+                  child: Text(
+                    "OK",
+                    style: TextStyle(color: darkColor),
+                  ),
+                ),
+              ],
+            ),
+          ],
         );
       },
     );

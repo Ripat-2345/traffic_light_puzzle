@@ -4,19 +4,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/countdown_timer_controller.dart';
 import 'package:flutter_game/const.dart';
+import 'package:flutter_game/controllers/music_controller.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter_game/controllers/home_controller.dart';
 
 class GameController extends GetxController {
   final homeController = Get.put(HomeController());
+  final musicController = Get.find<MusicController>();
   final _argument = Get.arguments;
+  late int remainingTime = DateTime.now().millisecondsSinceEpoch + 1000 * 90;
   late CountdownTimerController timeController = CountdownTimerController(
-    endTime: remainingTime.value,
+    endTime: remainingTime,
     onEnd: onTimeEnded,
   );
-  late RxInt remainingTime =
-      (DateTime.now().millisecondsSinceEpoch + 1000 * 90).obs;
   late Timer finish;
   var trafficLamp = 0.obs;
   var carMove = false.obs;
@@ -34,13 +35,7 @@ class GameController extends GetxController {
       });
     } else {
       selectedLevel(_argument[0]);
-      (remainingTime.value == 0) ? onTimeEnded() : null;
-      if (_argument[0] == "Level 1") {
-        WidgetsBinding.instance!.addPostFrameCallback((_) {
-          timeController.disposeTimer();
-          return guideDialog();
-        });
-      }
+      (remainingTime == 0) ? onTimeEnded() : null;
     }
   }
 
@@ -52,6 +47,7 @@ class GameController extends GetxController {
 
   Future<bool> onWillPop() {
     Get.offAllNamed("/Home");
+    musicController.stopMusic();
     timeController.dispose();
     return Future(() => true);
   }
@@ -133,6 +129,7 @@ class GameController extends GetxController {
       cancelTextColor: darkColor,
       onCancel: () {
         Get.offAllNamed('/Home');
+        musicController.stopMusic();
         timeController.dispose();
       },
       buttonColor: yellowColor,
@@ -168,11 +165,16 @@ class GameController extends GetxController {
               Get.offAllNamed(
                 "/FeedBack",
               );
+              musicController.stopMusic();
               timeController.dispose();
             },
             textCancel: "Back To Home",
             cancelTextColor: darkColor,
-            onCancel: () => Get.offAllNamed('/Home'),
+            onCancel: () {
+              Get.offAllNamed('/Home');
+              musicController.stopMusic();
+              timeController.dispose();
+            },
             buttonColor: yellowColor,
           );
         },
@@ -206,40 +208,12 @@ class GameController extends GetxController {
           cancelTextColor: darkColor,
           onCancel: () {
             Get.offAllNamed('/Home');
+            musicController.stopMusic();
             timeController.dispose();
           },
           buttonColor: yellowColor,
         );
       });
     }
-  }
-
-  void guideDialog() {
-    Get.defaultDialog(
-      barrierDismissible: false,
-      backgroundColor: whiteColor,
-      title: "Objective",
-      titleStyle: TextStyle(
-        fontSize: 20,
-        color: darkColor,
-      ),
-      contentPadding: const EdgeInsets.all(2),
-      content: ClipRRect(
-        borderRadius: BorderRadius.circular(5),
-        child: Image(
-          image: const AssetImage("assets/images/howtoplay5.png"),
-          width: (Get.width < 800) ? Get.width / 1.5 : Get.width / 2,
-          height: (Get.width < 800) ? Get.height / 4 : Get.height / 2,
-          fit: BoxFit.fill,
-        ),
-      ),
-      textConfirm: "OK",
-      confirmTextColor: darkColor,
-      onConfirm: () {
-        timeController.start();
-        Get.back();
-      },
-      buttonColor: yellowColor,
-    );
   }
 }

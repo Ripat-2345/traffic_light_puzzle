@@ -65,13 +65,10 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 InkWell(
-                  onTap: () => Get.toNamed(
-                    "/Game",
-                    arguments: [
-                      homeController.selectedLevel.value,
-                      homeController.fileCar,
-                    ],
-                  ),
+                  onTap: () {
+                    musicController.playMusic();
+                    homeController.guideDialog(context);
+                  },
                   child: Container(
                     height: 40,
                     width: 130,
@@ -113,6 +110,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           size: 30,
                           color: darkColor,
                         ),
+                        const SizedBox(
+                          width: 10,
+                        ),
                         const Text("Info"),
                       ],
                     ),
@@ -128,6 +128,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           size: 30,
                           color: darkColor,
                         ),
+                        const SizedBox(
+                          width: 10,
+                        ),
                         const Text("Demo"),
                       ],
                     ),
@@ -141,31 +144,34 @@ class _HomeScreenState extends State<HomeScreen> {
                           size: 30,
                           color: darkColor,
                         ),
+                        const SizedBox(
+                          width: 10,
+                        ),
                         const Text("Rate")
                       ],
                     ),
                   ),
-                  InkWell(
-                    onTap: () => musicController.musicPlay(),
-                    child: Row(
-                      children: [
-                        Obx(
-                          () => (musicController.isPlay.value)
-                              ? Icon(
-                                  Icons.volume_off_rounded,
-                                  size: 31,
-                                  color: darkColor,
-                                )
-                              : Icon(
-                                  Icons.volume_up_rounded,
-                                  size: 31,
-                                  color: darkColor,
-                                ),
-                        ),
-                        const Text("Music")
-                      ],
-                    ),
-                  )
+                  // InkWell(
+                  //   onTap: () => musicController.musicPlay(),
+                  //   child: Row(
+                  //     children: [
+                  //       Obx(
+                  //         () => (musicController.isPlay.value)
+                  //             ? Icon(
+                  //                 Icons.volume_up_rounded,
+                  //                 size: 31,
+                  //                 color: darkColor,
+                  //               )
+                  //             : Icon(
+                  //                 Icons.volume_off_rounded,
+                  //                 size: 31,
+                  //                 color: darkColor,
+                  //               ),
+                  //       ),
+                  //       const Text("Music")
+                  //     ],
+                  //   ),
+                  // ),
                 ],
               ),
             ),

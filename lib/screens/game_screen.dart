@@ -16,13 +16,6 @@ class GameScreen extends StatefulWidget {
 class _GameScreenState extends State<GameScreen>
     with SingleTickerProviderStateMixin {
   final gameController = Get.put(GameController());
-  late final AnimationController animationController;
-
-  @override
-  void initState() {
-    super.initState();
-    animationController = AnimationController(vsync: this);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +64,7 @@ class _GameScreenState extends State<GameScreen>
                                   width: 5,
                                 ),
                                 CountdownTimer(
-                                  endTime: gameController.remainingTime.value,
+                                  endTime: gameController.remainingTime,
                                   controller: gameController.timeController,
                                   widgetBuilder: (_, time) {
                                     if (time == null) {
@@ -290,153 +283,128 @@ class _GameScreenState extends State<GameScreen>
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Obx(() => AnimatedAlign(
-                            duration: const Duration(seconds: 2),
-                            alignment: gameController.carMove.value
-                                ? Alignment.bottomLeft
-                                : Alignment.bottomRight,
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                // Obx(
-                                //   () => (gameController.carMove.value)
-                                //       ? const SizedBox()
-                                //       : Container(
-                                //           width: (MediaQuery.of(context)
-                                //                       .size
-                                //                       .width <
-                                //                   800)
-                                //               ? 20
-                                //               : 40,
-                                //           height: (MediaQuery.of(context)
-                                //                       .size
-                                //                       .width <
-                                //                   800)
-                                //               ? 60
-                                //               : 100,
-                                //           decoration: BoxDecoration(
-                                //             borderRadius:
-                                //                 BorderRadius.circular(10),
-                                //             color: darkColor,
-                                //             border:
-                                //                 Border.all(color: Colors.grey),
-                                //           ),
-                                //           child: Column(
-                                //             mainAxisAlignment:
-                                //                 MainAxisAlignment.spaceEvenly,
-                                //             children: [
-                                //               Container(
-                                //                 width: (MediaQuery.of(context)
-                                //                             .size
-                                //                             .width <
-                                //                         800)
-                                //                     ? 9
-                                //                     : 25,
-                                //                 height: (MediaQuery.of(context)
-                                //                             .size
-                                //                             .width <
-                                //                         800)
-                                //                     ? 9
-                                //                     : 25,
-                                //                 decoration: BoxDecoration(
-                                //                   borderRadius:
-                                //                       BorderRadius.circular(
-                                //                           100),
-                                //                   color: Colors.green,
-                                //                 ),
-                                //               ),
-                                //               Container(
-                                //                 width: (MediaQuery.of(context)
-                                //                             .size
-                                //                             .width <
-                                //                         800)
-                                //                     ? 9
-                                //                     : 25,
-                                //                 height: (MediaQuery.of(context)
-                                //                             .size
-                                //                             .width <
-                                //                         800)
-                                //                     ? 9
-                                //                     : 25,
-                                //                 decoration: BoxDecoration(
-                                //                   borderRadius:
-                                //                       BorderRadius.circular(
-                                //                           100),
-                                //                   color: yellowColor,
-                                //                 ),
-                                //               ),
-                                //               Container(
-                                //                 width: (MediaQuery.of(context)
-                                //                             .size
-                                //                             .width <
-                                //                         800)
-                                //                     ? 9
-                                //                     : 25,
-                                //                 height: (MediaQuery.of(context)
-                                //                             .size
-                                //                             .width <
-                                //                         800)
-                                //                     ? 9
-                                //                     : 25,
-                                //                 decoration: BoxDecoration(
-                                //                   borderRadius:
-                                //                       BorderRadius.circular(
-                                //                           100),
-                                //                   color: Colors.red,
-                                //                 ),
-                                //               ),
-                                //             ],
-                                //           ),
-                                //         ),
-                                // ),
-
-                                SizedBox(
-                                  width:
-                                      (MediaQuery.of(context).size.width < 800)
-                                          ? (MediaQuery.of(context).size.width <
-                                                  400)
-                                              ? 150
-                                              : 200
-                                          : 300,
-                                  height:
-                                      (MediaQuery.of(context).size.width < 800)
-                                          ? (MediaQuery.of(context).size.width <
-                                                  400)
-                                              ? 90
-                                              : 120
-                                          : 180,
-                                  child: (gameController.argument == null)
-                                      ? Obx(
-                                          () => Lottie.asset(
-                                            "assets/images/car.json",
-                                            fit: BoxFit.cover,
-                                            controller: animationController,
-                                            onLoaded: (composition) {
-                                              if (gameController
-                                                  .carMove.value) {
-                                                animationController.forward();
-                                              }
-                                            },
-                                          ),
-                                        )
-                                      : Obx(
-                                          () => Lottie.asset(
-                                            "assets/images/${gameController.argument[1]}",
-                                            fit: BoxFit.cover,
-                                            controller: animationController,
-                                            onLoaded: (composition) {
-                                              if (gameController
-                                                  .carMove.value) {
-                                                animationController.forward();
-                                              }
-                                            },
-                                          ),
+                      Obx(
+                        () => AnimatedAlign(
+                          duration: const Duration(seconds: 2),
+                          alignment: gameController.carMove.value
+                              ? Alignment.bottomLeft
+                              : Alignment.bottomRight,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Obx(
+                                () => (gameController.carMove.value)
+                                    ? const SizedBox()
+                                    : Container(
+                                        width:
+                                            (MediaQuery.of(context).size.width <
+                                                    800)
+                                                ? 20
+                                                : 40,
+                                        height:
+                                            (MediaQuery.of(context).size.width <
+                                                    800)
+                                                ? 60
+                                                : 100,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          color: darkColor,
+                                          border:
+                                              Border.all(color: Colors.grey),
                                         ),
-                                ),
-                              ],
-                            ),
-                          )),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Container(
+                                              width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width <
+                                                      800)
+                                                  ? 9
+                                                  : 25,
+                                              height: (MediaQuery.of(context)
+                                                          .size
+                                                          .width <
+                                                      800)
+                                                  ? 9
+                                                  : 25,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(100),
+                                                color: Colors.green,
+                                              ),
+                                            ),
+                                            Container(
+                                              width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width <
+                                                      800)
+                                                  ? 9
+                                                  : 25,
+                                              height: (MediaQuery.of(context)
+                                                          .size
+                                                          .width <
+                                                      800)
+                                                  ? 9
+                                                  : 25,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(100),
+                                                color: yellowColor,
+                                              ),
+                                            ),
+                                            Container(
+                                              width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width <
+                                                      800)
+                                                  ? 9
+                                                  : 25,
+                                              height: (MediaQuery.of(context)
+                                                          .size
+                                                          .width <
+                                                      800)
+                                                  ? 9
+                                                  : 25,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(100),
+                                                color: Colors.red,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                              ),
+                              SizedBox(
+                                width: (MediaQuery.of(context).size.width < 800)
+                                    ? (MediaQuery.of(context).size.width < 400)
+                                        ? 150
+                                        : 200
+                                    : 300,
+                                height: (MediaQuery.of(context).size.width <
+                                        800)
+                                    ? (MediaQuery.of(context).size.width < 400)
+                                        ? 90
+                                        : 120
+                                    : 180,
+                                child: (gameController.argument == null)
+                                    ? Lottie.asset(
+                                        "assets/images/car.json",
+                                        fit: BoxFit.cover,
+                                      )
+                                    : Lottie.asset(
+                                        "assets/images/${gameController.argument[1]}",
+                                        fit: BoxFit.cover,
+                                      ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                       Container(
                         margin: const EdgeInsets.only(
                           left: 20,

@@ -11,10 +11,7 @@ class MusicController extends GetxController {
     music.open(
       Audio.file("assets/musics/backsound1.mp3"),
       loopMode: LoopMode.single,
-      playInBackground: PlayInBackground.enabled,
     );
-
-    playMusic();
   }
 
   @override
@@ -25,12 +22,6 @@ class MusicController extends GetxController {
 
   void musicPlay() {
     isPlay.toggle();
-
-    if (isPlay.value) {
-      stopMusic();
-    } else {
-      playMusic();
-    }
   }
 
   playMusic() {
