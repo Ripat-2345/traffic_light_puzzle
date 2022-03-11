@@ -188,7 +188,7 @@ class HomeController extends GetxController {
           content: ClipRRect(
             borderRadius: BorderRadius.circular(5),
             child: Image(
-              image: const AssetImage("assets/images/howtoplay5.png"),
+              image: const AssetImage("assets/images/howtoplay4.png"),
               width: (Get.width < 800) ? Get.width / 1.5 : Get.width / 1.5,
               height: (Get.width < 800) ? Get.height / 4 : Get.height / 1.5,
               fit: BoxFit.fill,

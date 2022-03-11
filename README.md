@@ -32,7 +32,7 @@ Developed using these technologies below <br>
 
 <table>
      <tr>
-          <td>1. Select the puzzle difficulty level you want to play. the default level will start from level one</td>
+          <td>1. You can Choose the car's color you want (optional) and press strat button to play the game </td>
           <td>2. Choose the car's color you want (optional)</td>
      </tr>
      <tr>
