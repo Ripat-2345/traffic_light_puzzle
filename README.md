@@ -33,19 +33,19 @@ Developed using these technologies below <br>
 <table>
      <tr>
           <td>1. You can Choose the car's color you want (optional) and press strat button to play the game </td>
-          <td>2. Choose the car's color you want (optional)</td>
+          <td>2. There is an objective of this game will pop up after you press the start button</td>
      </tr>
      <tr>
+          <td><img src="assets/images/howtoplay1.png" width="100%"/></td>
           <td><img src="assets/images/howtoplay2.png" width="100%"/></td>
-          <td><img src="assets/images/howtoplay3.png" width="100%"/></td>
      </tr>
      <tr>
-          <td>3. Press start button to play the game</td>
+          <td>3. Match all the lights to green by tapping on each traffic light image to change its color. also, pay attention to the time that keeps moving backward</td>
           <td>4. Match all the lights to green by tapping on each traffic light image to change its color. also, pay attention to the time that keeps moving backward </td>
      </tr>
      <tr>
-          <td><img src="assets/images/howtoplay4.png" width="100%"/></td>
           <td><img src="assets/images/howtoplay5.png" width="100%"/></td>
+          <td><img src="assets/images/howtoplay7.png" width="100%"/></td>
      </tr>
      
 </table>

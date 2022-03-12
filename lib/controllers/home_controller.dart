@@ -46,7 +46,6 @@ class HomeController extends GetxController {
     'assets/images/howtoplay6.png',
     'assets/images/howtoplay7.png',
     'assets/images/howtoplay8.png',
-    'assets/images/howtoplay9.png',
   ];
 
   void changeCarColor(Color colorChoose) {
