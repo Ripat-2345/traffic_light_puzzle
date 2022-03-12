@@ -52,7 +52,10 @@ Developed using these technologies below <br>
 
 To find out more clearly, please watch the demo video below! 
 
-https://user-images.githubusercontent.com/85988238/154833892-34831faf-d554-4449-902a-d27b08d32930.mp4
+
+
+https://user-images.githubusercontent.com/85988238/158028534-0dc967ff-11ed-42d2-a0be-c8b973c0ec6b.mp4
+
 
 
 ## Lets play
