@@ -52,7 +52,8 @@ Developed using these technologies below <br>
 
 To find out more clearly, please watch the demo video below! 
 
-https://youtu.be/6C_p7a_pCNo
+https://user-images.githubusercontent.com/85988238/154833892-34831faf-d554-4449-902a-d27b08d32930.mp4
+
 
 ## Lets play
 https://traffic-light-puzzle.web.app/#/Home
