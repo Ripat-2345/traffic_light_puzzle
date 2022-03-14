@@ -32,31 +32,30 @@ Developed using these technologies below <br>
 
 <table>
      <tr>
-          <td>1. You can Choose the car's color you want (optional) and press strat button to play the game </td>
-          <td>2. Choose the car's color you want (optional)</td>
+          <td>1. This home screen show you all features of this game. If you want to play this game follow the next steps</td>
+          <td>2. You can Choose the car's color you want (optional) and press strat button to play the game </td>
      </tr>
      <tr>
+          <td><img src="assets/images/howtoplay1.png" width="100%"/></td>
           <td><img src="assets/images/howtoplay2.png" width="100%"/></td>
-          <td><img src="assets/images/howtoplay3.png" width="100%"/></td>
      </tr>
      <tr>
-          <td>3. Press start button to play the game</td>
-          <td>4. Match all the lights to green by tapping on each traffic light image to change its color. also, pay attention to the time that keeps moving backward </td>
+          <td>3. Match all the lights to green by tapping on each traffic light image to change its color. also, pay attention to the time that keeps moving backward</td>
+          <td>4. After finish all levels, feel free to give us a feedback </td>
      </tr>
      <tr>
           <td><img src="assets/images/howtoplay4.png" width="100%"/></td>
-          <td><img src="assets/images/howtoplay5.png" width="100%"/></td>
+          <td><img src="assets/images/howtoplay7.png" width="100%"/></td>
      </tr>
      
 </table>
 
 To find out more clearly, please watch the demo video below! 
 
-https://user-images.githubusercontent.com/85988238/154833892-34831faf-d554-4449-902a-d27b08d32930.mp4
-
+https://www.youtube.com/watch?v=6C_p7a_pCNo&feature=youtu.be
 
 ## Lets play
-(link)
+https://traffic-light-puzzle.web.app/#/Home
 
 
 
