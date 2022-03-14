@@ -119,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   InkWell(
                     onTap: () => html.window.open(
-                        "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+                        "https://www.youtube.com/watch?v=6C_p7a_pCNo",
                         "Demo Game"),
                     child: Row(
                       children: [

@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_game/const.dart';
@@ -46,7 +44,6 @@ class HomeController extends GetxController {
     'assets/images/howtoplay6.png',
     'assets/images/howtoplay7.png',
     'assets/images/howtoplay8.png',
-    'assets/images/howtoplay9.png',
   ];
 
   void changeCarColor(Color colorChoose) {
